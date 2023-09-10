@@ -1,0 +1,3636 @@
+@prefix : <http://www.valbormida.it/attilio/f1.owl> .
+@prefix f1: <http://www.valbormida.it/attilio/f1.owl> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.valbormida.it/attilio/f1.owl> .
+
+<http://www.valbormida.it/attilio/f1.owl> rdf:type owl:Ontology ;
+                                           <http://purl.org/dc/elements/1.1/creator> "Attilio Sangalli"@it ;
+                                           <http://purl.org/dc/elements/1.1/date> "2023-09"@it ;
+                                           <http://purl.org/dc/elements/1.1/description> "Ontologia che illustra il mondo della Formula 1 nelle sue componenti: eventi, circuiti, scuderie e piloti partecipanti"@it ;
+                                           <http://purl.org/dc/elements/1.1/title> "Formula1Ontology"@en ;
+                                           :vann:preferredNamespacePrefix "F1"@it ;
+                                           :vann:preferredNamespaceUri "http://www.semanticweb.org/attilio/ontologies/2022/9/f1#"@it ;
+                                           rdfs:label "Formula1"@it .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/elements/1.1/creator
+<http://purl.org/dc/elements/1.1/creator> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/date
+<http://purl.org/dc/elements/1.1/date> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/description
+<http://purl.org/dc/elements/1.1/description> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/title
+<http://purl.org/dc/elements/1.1/title> rdf:type owl:AnnotationProperty .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#vann:preferredNamespacePrefix
+:vann:preferredNamespacePrefix rdf:type owl:AnnotationProperty .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#vann:preferredNamespaceUri
+:vann:preferredNamespaceUri rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.valbormida.it/attilio/f1.owl#acquistaMotore
+:acquistaMotore rdf:type owl:ObjectProperty ;
+                owl:inverseOf :fornisceMotore ;
+                rdfs:domain :ScuderiaCliente ;
+                rdfs:range :ScuderiaCostruttore ;
+                rdfs:comment "mette in relazione una scuderia che non si costruisce la propria power unit con la scuderia che gliela fornisce"@it ;
+                rdfs:label "acquistaMotore"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#avvieneDurante
+:avvieneDurante rdf:type owl:ObjectProperty ;
+                owl:inverseOf :faSvolgere ;
+                rdfs:domain :Gara ;
+                rdfs:range :Evento ;
+                rdfs:comment "mette in relazione la gara, in senso sportivo, con l'evento durante il quale tale gara si svolge"@it ;
+                rdfs:label "avvieneDurante"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#campioneCostruttori
+:campioneCostruttori rdf:type owl:ObjectProperty ;
+                     owl:inverseOf :haCampioneCostruttori ;
+                     rdfs:domain :Scuderia ;
+                     rdfs:range :Campionato ;
+                     rdfs:comment "mette in relazione la squadra vincitrice del titolo costruttori con tale campionato"@it ;
+                     rdfs:label "campioneCostruttori"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#campioneMondiale
+:campioneMondiale rdf:type owl:ObjectProperty ;
+                  owl:inverseOf :haCampione ;
+                  rdfs:domain :Pilota ;
+                  rdfs:range :Campionato ;
+                  rdfs:comment "mette in relazione il pilota che vince il titolo, con il relativo campionato"@it ;
+                  rdfs:label "campioneMondiale"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#compagnoDiTeam
+:compagnoDiTeam rdf:type owl:ObjectProperty ,
+                         owl:SymmetricProperty ;
+                rdfs:domain :Pilota ;
+                rdfs:range :Pilota ;
+                rdfs:comment "mette in relazione due piloti che corrono per la stessa scuderia"@it ;
+                rdfs:label "compagnodiTeam"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#correPer
+:correPer rdf:type owl:ObjectProperty ;
+          owl:inverseOf :haPilota ;
+          rdfs:domain :Pilota ;
+          rdfs:range :Scuderia ;
+          rdfs:comment "mette in relazione un pilota con la scuderia per cui corre"@it ;
+          rdfs:label "correPer"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#detieneTrackRecord
+:detieneTrackRecord rdf:type owl:ObjectProperty ;
+                    rdfs:domain :Pilota ;
+                    rdfs:range :Circuito ;
+                    rdfs:comment "mette in relazione un pilota con il circuito in cui tale pilota detiene il record del tracciato"@it ;
+                    rdfs:label "detieneTrackRecord"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#edizioneDi
+:edizioneDi rdf:type owl:ObjectProperty ;
+            owl:inverseOf :haEdizione ;
+            rdfs:domain :Evento ;
+            rdfs:range :GranPremio ;
+            rdfs:comment "mette in relazione l'edizione di un gran premio con la manifestazione di cui ne è un'edizione"@it ;
+            rdfs:label "edizioneDi"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#eventoDi
+:eventoDi rdf:type owl:ObjectProperty ;
+          owl:inverseOf :haEvento ;
+          rdfs:domain :Evento ;
+          rdfs:range :Campionato ;
+          rdfs:comment "mette in relazione l'edizione di un gran premio con il campionato in cui tale edizione è svolta"@it ;
+          rdfs:label "eventoDi"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#faSvolgere
+:faSvolgere rdf:type owl:ObjectProperty ;
+            rdfs:comment "mette in relazione l'edizione di un gran premio con la gara sportiva che durante tale evento viene corsa"@it ;
+            rdfs:label "faSvolgere"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#fornisceMotore
+:fornisceMotore rdf:type owl:ObjectProperty ;
+                rdfs:domain :ScuderiaCostruttore ;
+                rdfs:range :ScuderiaCliente ;
+                rdfs:comment "mette in relazione una scuderia che costruisce la propria power unit con la scuderia a cui tale power unit è fornita"@it ;
+                rdfs:label "fornisceMotore"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#gpv
+:gpv rdf:type owl:ObjectProperty ;
+     owl:inverseOf :ottieneGPV ;
+     rdfs:domain :Gara ;
+     rdfs:range :Pilota ;
+     rdfs:comment "mette in relazione una gara con il pilota che fa segnare il giro più veloce durante tale gara"@it ;
+     rdfs:label "giroPiùVeloce"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#haCampione
+:haCampione rdf:type owl:ObjectProperty ;
+            rdfs:domain :Campionato ;
+            rdfs:range :Pilota ;
+            rdfs:comment "mette in relazione un campionato con il pilota che vince il titolo piloti in palio per quel campionato"@it ;
+            rdfs:label "haCampione"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#haCampioneCostruttori
+:haCampioneCostruttori rdf:type owl:ObjectProperty ;
+                       rdfs:domain :Campionato ;
+                       rdfs:range :Scuderia ;
+                       rdfs:comment "mette in relazione un campionato con la scuderia che vince il titolo costruttori in palio per quel campionato"@it ;
+                       rdfs:label "haCampioneCostruttori"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#haEdizione
+:haEdizione rdf:type owl:ObjectProperty ;
+            rdfs:domain :GranPremio ;
+            rdfs:range :Evento ;
+            rdfs:comment "mette in relazione un gran premio con una sua edizione"@it ;
+            rdfs:label "haEdizione"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#haEvento
+:haEvento rdf:type owl:ObjectProperty ;
+          rdfs:domain :Campionato ;
+          rdfs:range :Evento ;
+          rdfs:comment "mette in relazione un campionato con un'edizione di gran premio che avviene in tale campionato"@it ;
+          rdfs:label "haEvento"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#haLocation
+:haLocation rdf:type owl:ObjectProperty ;
+            owl:inverseOf :haOspitato ;
+            rdfs:domain :CircuitoOmologato ;
+            rdfs:range :Evento ;
+            owl:propertyChainAxiom ( :faSvolgere
+                                     :tenutaPresso
+                                   ) ;
+            rdfs:comment "proprietà che lega un'edizione di Gran Premio al circuito su cui si è svolta la relativa gara"@it ;
+            rdfs:label "haLocation"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#haOspitato
+:haOspitato rdf:type owl:ObjectProperty ;
+            rdfs:comment "proprietà che lega un circuito alle edizioni di un Gran Premio la cui gara si è tenuta su tale circuito"@it ;
+            rdfs:label "haOspitato"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#haPartecipante
+:haPartecipante rdf:type owl:ObjectProperty ;
+                owl:inverseOf :partecipa ;
+                rdfs:domain :Campionato ;
+                rdfs:range :Scuderia ;
+                rdfs:comment "mette in relazione un campionato con una scuderia iscritta a tale campionato"@it ;
+                rdfs:label "haPartecipante"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#haPilota
+:haPilota rdf:type owl:ObjectProperty ;
+          rdfs:domain :Scuderia ;
+          rdfs:range :Pilota ;
+          rdfs:comment "mette in relazione una scuderia con un pilota che corre per tale scuderia"@it ;
+          rdfs:label "haPilota"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#haPoleSitter
+:haPoleSitter rdf:type owl:ObjectProperty ;
+              owl:inverseOf :haPresoPole ;
+              rdfs:domain :Gara ;
+              rdfs:range :Pilota ;
+              rdfs:comment "mette in relazione una gara con il pilota che ha ottenuto di partire dalla pole position in tale gara"@it ;
+              rdfs:label "haPoleSitter"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#haPresoPole
+:haPresoPole rdf:type owl:ObjectProperty ;
+             rdfs:domain :Pilota ;
+             rdfs:range :Gara ;
+             rdfs:comment "mette in relazione un pilota con una gara in cui tale pilota ha ottenuto di partire dalla pole position"@it ;
+             rdfs:label "haPresoPole"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#haPrimoEvento
+:haPrimoEvento rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf :haEvento ;
+               rdfs:domain :Campionato ;
+               rdfs:range :Evento ;
+               rdfs:comment "mette in relazione un campionato con l'evento iniziale di tale campionato"@it ;
+               rdfs:label "haPrimoEvento"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#haScuderiaVincitore
+:haScuderiaVincitore rdf:type owl:ObjectProperty ;
+                     rdfs:domain :Gara ;
+                     rdfs:range :Scuderia ;
+                     rdfs:comment "mette in relazione una gara con la scuderia per cui corre il pilota che ha vinto tale gara"@it ;
+                     rdfs:label "haScuderiaVincitrice"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#haUltimoEvento
+:haUltimoEvento rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf :haEvento ;
+                rdfs:domain :Campionato ;
+                rdfs:range :Evento ;
+                rdfs:comment "mette in relazione un campionato con l'ultimo evento che si tiene in tale campionato"@it ;
+                rdfs:label "haUltimoEvento"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#haVincitore
+:haVincitore rdf:type owl:ObjectProperty ;
+             owl:inverseOf :haVinto ;
+             rdfs:domain :Gara ;
+             rdfs:range :Pilota ;
+             rdfs:comment "mette in relazione una gara con il pilota che ha vinto tale gara"@it ;
+             rdfs:label "haVincitore"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#haVinto
+:haVinto rdf:type owl:ObjectProperty ;
+         rdfs:domain :Pilota ;
+         rdfs:range :Gara ;
+         rdfs:comment "mette in relazione un pilota con una gara che tale pilota ha vinto"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#haVintoPresso
+:haVintoPresso rdf:type owl:ObjectProperty ;
+               owl:inverseOf :haVistoVincere ;
+               rdfs:domain :Pilota ;
+               rdfs:range :Circuito ;
+               owl:propertyChainAxiom ( :haVinto
+                                        :tenutaPresso
+                                      ) ;
+               rdfs:comment "proprietà che lega un pilota ai circuiti sui quali ha vinto una gara"@it ;
+               rdfs:label "haVintoPresso"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#haVistoVincere
+:haVistoVincere rdf:type owl:ObjectProperty ;
+                rdfs:comment "proprietà che lega un circuito ai piloti che hanno vinto una gara disputata in tale circuito"@it ;
+                rdfs:label "haVistoVincere"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#ottieneGPV
+:ottieneGPV rdf:type owl:ObjectProperty ;
+            rdfs:domain :Pilota ;
+            rdfs:range :Gara ;
+            rdfs:comment "mette in relazione un pilota con una gara in cui tale pilota ha fatto segnare il giro più veloce"@it ;
+            rdfs:label "ottieneGPV"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#partecipa
+:partecipa rdf:type owl:ObjectProperty ;
+           rdfs:domain :Scuderia ;
+           rdfs:range :Campionato ;
+           rdfs:comment "mette in relazione una scuderia con un campionato a cui tale scuderia è iscritta"@it ;
+           rdfs:label "partecipa"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#precede
+:precede rdf:type owl:ObjectProperty ;
+         owl:inverseOf :segue ;
+         rdfs:domain :Evento ;
+         rdfs:range :Evento ;
+         rdfs:comment "mette in relazione un evento con il successivo di quel campionato"@it ;
+         rdfs:label "precede"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#segue
+:segue rdf:type owl:ObjectProperty ;
+       rdfs:comment "mette in relazione un evento con il precedente di quel campionato"@it ;
+       rdfs:label "segue"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#tenutaPresso
+:tenutaPresso rdf:type owl:ObjectProperty ;
+              rdfs:domain :Gara ;
+              rdfs:range :CircuitoOmologato ;
+              rdfs:comment "mette in relazione una gara con il circuito su cui tale gara è corsa"@it ;
+              rdfs:label "tenutaPresso"@it .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.valbormida.it/attilio/f1.owl#anno
+:anno rdf:type owl:DatatypeProperty ,
+               owl:FunctionalProperty ;
+      rdfs:domain :Campionato ;
+      rdfs:range xsd:int ;
+      rdfs:comment "Anno di svolgimento del campionato"@it ;
+      rdfs:label "anno"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#lunghezza
+:lunghezza rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Circuito ;
+           rdfs:range xsd:int ;
+           rdfs:comment "lunghezza in metri del circuito, intesa come misurando sempre al centro del tracciato, e non in riferimento alla racing line o alla traiettoria più interna o esterna"@it ;
+           rdfs:label "lunghezza"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#numeroDiGara
+:numeroDiGara rdf:type owl:DatatypeProperty ,
+                       owl:FunctionalProperty ;
+              rdfs:domain :Pilota ;
+              rdfs:range xsd:int ;
+              rdfs:comment "numero di gara identificativo del pilota. Viene apposto su ogni vettura che scende in pista guidata da tale pilota. Piloti ritirati o non partecipanti a un campionato vedono il proprio numero rimanergli \"riservato\" per i successivi due anni, dopodiché tornerà libero di essere scelto da qualsiasi altro pilota"@it ;
+              rdfs:label "numero di gara"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#sigla
+:sigla rdf:type owl:DatatypeProperty ,
+                owl:FunctionalProperty ;
+       rdfs:domain :Pilota ;
+       rdfs:range xsd:string ;
+       rdfs:comment "abbreviazione \"ufficiale\" del pilota. Generalmente composta dalle prime tre lettere del cognome, in casi particolari può essere modificata ad hoc per evitare ambiguità"@it ;
+       rdfs:label "sigla"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#trackRecord
+:trackRecord rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Circuito ;
+             rdfs:range xsd:string ;
+             rdfs:comment "con record della pista si intende il miglior tempo fatto registrare sul layout attuale del circuito. Circuiti come Albert Park, Catalogna e Yas Marina hanno subito modifiche negli ultimi anni, cambiandone le velocità e quindi anche i tempi di percorrenza"@it ;
+             rdfs:label "record della pista"@it .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.valbormida.it/attilio/f1.owl#Campionato
+:Campionato rdf:type owl:Class ;
+            rdfs:comment "Un campionato è una stagione annuale in cui viene disputata una serie di eventi e che alla fine assegna il titolo piloti e il titolo costruttori"@it ;
+            rdfs:label "Campionato"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Circuito
+:Circuito rdf:type owl:Class ;
+          rdfs:comment "un circuito è una sequenza di rettilinei e curve su cui vengono disputate manifestazioni sportive motoristiche"@it ;
+          rdfs:label "Circuito"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#CircuitoOmologato
+:CircuitoOmologato rdf:type owl:Class ;
+                   owl:equivalentClass [ rdf:type owl:Class ;
+                                         owl:oneOf ( :AlbertPark
+                                                     :Algarve
+                                                     :Aragon
+                                                     :AutodromoEnzoDinoFerrari
+                                                     :AutodromoHermanosRodriguez
+                                                     :BahrainCircuit
+                                                     :BakuStreetCircuit
+                                                     :BarcelonaCatalunya
+                                                     :BuddhCircuit
+                                                     :CircuitGillesVilleneuve
+                                                     :CircuitOfTheAmericas
+                                                     :EstorilCircuit
+                                                     :Fiorano
+                                                     :FujiSpeedway
+                                                     :Hockenheimring
+                                                     :Hungaroring
+                                                     :IgoraDrive
+                                                     :Indianapolis
+                                                     :Interlagos
+                                                     :IstanbulPark
+                                                     :JeddahCornicheCircuit
+                                                     :Jerez
+                                                     :KoreaCircuit
+                                                     :LusailCircuit
+                                                     :MarinaBay
+                                                     :MiamiCircuit
+                                                     :Montecarlo
+                                                     :Monza
+                                                     :Mugello
+                                                     :NeversMagnyCours
+                                                     :Nurburgring
+                                                     :PaulRicard
+                                                     :RedBullRing
+                                                     :RicardoTormo
+                                                     :Sepang
+                                                     :Shanghai
+                                                     :Silverstone
+                                                     :Sochi
+                                                     :SpaFrancorchamps
+                                                     :Suzuka
+                                                     :YasMarina
+                                                     :Zandvoort
+                                                   )
+                                       ] ;
+                   rdfs:subClassOf :Circuito ;
+                   rdfs:comment "un circuito omologato è un circuito che ha ottenuto la massima certificazione della FIA (grade 1), necessaria per ospitare eventi di Formula 1."@it ;
+                   rdfs:label "CircuitoOmologato"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Evento
+:Evento rdf:type owl:Class ;
+        rdfs:comment "un Evento è l'edizione stagionale di un certo Gran Premio"@it ;
+        rdfs:label "Evento"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Gara
+:Gara rdf:type owl:Class ;
+      rdfs:comment "una gara è la manifestazione sportiva motoristica che si svolge nel corso di un evento di Formula 1"@it ;
+      rdfs:label "Gara"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GranPremio
+:GranPremio rdf:type owl:Class ;
+            rdfs:comment "un Gran Premio è una manifestazione di Formula 1 che vede edizioni organizzate a cadenza annuale"@it ;
+            rdfs:label "GranPremio"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Pilota
+:Pilota rdf:type owl:Class ;
+        rdfs:comment "un pilota è un atleta che corre per una scuderia iscritta a un campionato di Formula 1"@it ;
+        rdfs:label "Pilota"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#PilotaCampione
+:PilotaCampione rdf:type owl:Class ;
+                owl:equivalentClass [ owl:intersectionOf ( :Pilota
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :campioneMondiale ;
+                                                             owl:someValuesFrom :Campionato
+                                                           ]
+                                                         ) ;
+                                      rdf:type owl:Class
+                                    ] ;
+                rdfs:subClassOf :Pilota ;
+                rdfs:comment "indica un pilota che ha vinto almeno una volta un campionato piloti"@it ;
+                rdfs:label "PilotaCampione"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#PilotaGrandeVincitore
+:PilotaGrandeVincitore rdf:type owl:Class ;
+                       owl:equivalentClass [ owl:intersectionOf ( :PilotaVincitore
+                                                                  [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty :haVinto ;
+                                                                    owl:minQualifiedCardinality "10"^^xsd:nonNegativeInteger ;
+                                                                    owl:onClass :Gara
+                                                                  ]
+                                                                ) ;
+                                             rdf:type owl:Class
+                                           ] ;
+                       rdfs:subClassOf :PilotaVincitore ;
+                       rdfs:comment "indica un pilota che ha vinto almeno dieci gare"@it ;
+                       rdfs:label "PilotaGrandeVincitore"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#PilotaMoltePole
+:PilotaMoltePole rdf:type owl:Class ;
+                 owl:equivalentClass [ owl:intersectionOf ( :PilotaPoleSitter
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty :haPresoPole ;
+                                                              owl:minQualifiedCardinality "10"^^xsd:nonNegativeInteger ;
+                                                              owl:onClass :Gara
+                                                            ]
+                                                          ) ;
+                                       rdf:type owl:Class
+                                     ] ;
+                 rdfs:subClassOf :PilotaPoleSitter ;
+                 rdfs:comment "indica un pilota che ha ottenuto almeno dieci volte di partire dalla pole position"@it ;
+                 rdfs:label "PilotaMoltePole"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#PilotaMoltoVeloce
+:PilotaMoltoVeloce rdf:type owl:Class ;
+                   owl:equivalentClass [ owl:intersectionOf ( :PilotaVeloce
+                                                              [ rdf:type owl:Restriction ;
+                                                                owl:onProperty :ottieneGPV ;
+                                                                owl:minQualifiedCardinality "10"^^xsd:nonNegativeInteger ;
+                                                                owl:onClass :Gara
+                                                              ]
+                                                            ) ;
+                                         rdf:type owl:Class
+                                       ] ;
+                   rdfs:subClassOf :PilotaVeloce ;
+                   rdfs:comment "indica un pilota che ha fatto segnare il giro più veloce in una gara almeno dieci volte"@it ;
+                   rdfs:label "PilotaMoltoVeloce"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#PilotaPoleSitter
+:PilotaPoleSitter rdf:type owl:Class ;
+                  owl:equivalentClass [ owl:intersectionOf ( :Pilota
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty :haPresoPole ;
+                                                               owl:someValuesFrom :Gara
+                                                             ]
+                                                           ) ;
+                                        rdf:type owl:Class
+                                      ] ;
+                  rdfs:subClassOf :Pilota ;
+                  rdfs:comment "indica un pilota che ha ottenuto almeno una volta di partire dalla pole position in una gara"@it ;
+                  rdfs:label "PilotaPoleSitter"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#PilotaVeloce
+:PilotaVeloce rdf:type owl:Class ;
+              owl:equivalentClass [ owl:intersectionOf ( :Pilota
+                                                         [ rdf:type owl:Restriction ;
+                                                           owl:onProperty :ottieneGPV ;
+                                                           owl:someValuesFrom :Gara
+                                                         ]
+                                                       ) ;
+                                    rdf:type owl:Class
+                                  ] ;
+              rdfs:subClassOf :Pilota ;
+              rdfs:comment "indica un pilota che ha fatto segnare almeno una volta in giro più veloce in una gara"@it ;
+              rdfs:label "PilotaVeloce"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#PilotaVincitore
+:PilotaVincitore rdf:type owl:Class ;
+                 owl:equivalentClass [ owl:intersectionOf ( :Pilota
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty :haVinto ;
+                                                              owl:someValuesFrom :Gara
+                                                            ]
+                                                          ) ;
+                                       rdf:type owl:Class
+                                     ] ;
+                 rdfs:subClassOf :Pilota ;
+                 rdfs:comment "indica un pilota che ha vinto almeno una gara"@it ;
+                 rdfs:label "PilotaVincitore"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Scuderia
+:Scuderia rdf:type owl:Class ;
+          rdfs:subClassOf [ rdf:type owl:Class ;
+                            owl:unionOf ( :ScuderiaCliente
+                                          :ScuderiaCostruttore
+                                        )
+                          ] ;
+          owl:disjointUnionOf ( :ScuderiaCliente
+                                :ScuderiaCostruttore
+                              ) ;
+          rdfs:comment "una scuderia è una squadra corse iscritta a un campionato di Formula 1"@it ;
+          rdfs:label "Scuderia"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#ScuderiaCliente
+:ScuderiaCliente rdf:type owl:Class ;
+                 rdfs:subClassOf :Scuderia ;
+                 rdfs:comment "indica una scuderia che non costruisce la propria power unit, ma che tramite accordo commerciale la riceve in fornitura da un'altra scuderia"@it ;
+                 rdfs:label "ScuderiaCliente"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#ScuderiaCostruttore
+:ScuderiaCostruttore rdf:type owl:Class ;
+                     rdfs:subClassOf :Scuderia ;
+                     rdfs:comment "indica una scuderia che costruisce la propria power unit da montare sulle vetture. Può eventualmente fornire tale power unit anche ad altre scuderie che non costruiscono la propria"@it ;
+                     rdfs:label "ScuderiaCostruttore"@it .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.valbormida.it/attilio/f1.owl#AbuDhabi2020
+:AbuDhabi2020 rdf:type owl:NamedIndividual ,
+                       :Gara ;
+              :gpv :Ricciardo ;
+              :haPoleSitter :Verstappen ;
+              :haScuderiaVincitore :RedBull ;
+              :haVincitore :Verstappen ;
+              :tenutaPresso :YasMarina ;
+              rdfs:comment "Gara che si è svolta in occasione dell'edizione 2020 del Gran Premio di Abu Dhabi"@it ;
+              rdfs:label "AbuDhabi2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#AbuDhabi2021
+:AbuDhabi2021 rdf:type owl:NamedIndividual ,
+                       :Gara ;
+              :gpv :Verstappen ;
+              :haPoleSitter :Verstappen ;
+              :haScuderiaVincitore :RedBull ;
+              :haVincitore :Verstappen ;
+              :tenutaPresso :YasMarina ;
+              rdfs:comment "Gara che si è svolta in occasione dell'edizione 2021 del Gran Premio di Abu Dhabi"@it ;
+              rdfs:label "AbuDhabi2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#AbuDhabi2022
+:AbuDhabi2022 rdf:type owl:NamedIndividual ,
+                       :Gara ;
+              :gpv :Norris ;
+              :haPoleSitter :Verstappen ;
+              :haScuderiaVincitore :RedBull ;
+              :haVincitore :Verstappen ;
+              :tenutaPresso :YasMarina ;
+              rdfs:comment "Gara che si è svolta in occasione dell'edizione 2022 del Gran Premio di Abu Dhabi"@it ;
+              rdfs:label "AbuDhabi2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#AlbertPark
+:AlbertPark rdf:type owl:NamedIndividual ,
+                     :Circuito ;
+            :lunghezza "5278"^^xsd:int ;
+            :trackRecord "1:20:235" ;
+            rdfs:comment "circuito di Albert Park, a Melbourne"@it ;
+            rdfs:label "AlbertPark"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Albon
+:Albon rdf:type owl:NamedIndividual ,
+                :Pilota ;
+       :compagnoDiTeam :Sargeant ;
+       :correPer :Williams ;
+       :numeroDiGara "23"^^xsd:int ;
+       :sigla "ALB" ;
+       rdfs:comment "Alexander Albon, pilota di F1"@it ;
+       rdfs:label "Albon"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#AlfaRomeoSauber
+:AlfaRomeoSauber rdf:type owl:NamedIndividual ,
+                          :ScuderiaCliente ;
+                 :partecipa :campionato2020 ,
+                            :campionato2021 ,
+                            :campionato2022 ;
+                 rdfs:comment "squadra corse Alfa Romeo Sauber"@it ;
+                 rdfs:label "AlfaRomeoSauber"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Algarve
+:Algarve rdf:type owl:NamedIndividual ,
+                  :Circuito ;
+         :lunghezza "4653"^^xsd:int ;
+         :trackRecord "1:18:750" ;
+         rdfs:comment "circuito dell'Algarve, in Portogallo"@it ;
+         rdfs:label "Algarve"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Alonso
+:Alonso rdf:type owl:NamedIndividual ,
+                 :Pilota ;
+        :compagnoDiTeam :Stroll ;
+        :correPer :AstonMartin ;
+        :numeroDiGara "14"^^xsd:int ;
+        :sigla "ALO" ;
+        rdfs:comment "Fernando Alonso, pilota di F1"@it ;
+        rdfs:label "Alonso"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#AlphaTauri
+:AlphaTauri rdf:type owl:NamedIndividual ,
+                     :ScuderiaCliente ;
+            :partecipa :campionato2020 ,
+                       :campionato2021 ,
+                       :campionato2022 ;
+            rdfs:comment "squadra corse Alpha Tauri, conosciuta fino al 2019 con la denominazione \"ToroRosso\" e sorella minore di Red Bull Racing"@it ;
+            rdfs:label "AlphaTauri"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Alpine
+:Alpine rdf:type owl:NamedIndividual ,
+                 :ScuderiaCostruttore ;
+        :partecipa :campionato2021 ,
+                   :campionato2022 ;
+        rdfs:comment "squadra corse Alpine, conosciuta fino al 2020 come Renault"@it ;
+        rdfs:label "Alpine"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Anderstorp
+:Anderstorp rdf:type owl:NamedIndividual ,
+                     :Circuito ;
+            :lunghezza "4025"^^xsd:int ;
+            rdfs:comment "circuito di Anderstorp, in Svezia"@it ;
+            rdfs:label "Anderstorp"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Arabia2021
+:Arabia2021 rdf:type owl:NamedIndividual ,
+                     :Gara ;
+            :gpv :Hamilton ;
+            :haPoleSitter :Hamilton ;
+            :haScuderiaVincitore :Mercedes ;
+            :haVincitore :Hamilton ;
+            :tenutaPresso :JeddahCornicheCircuit ;
+            rdfs:comment "Gara che si è svolta in occasione dell'edizione 2021 del Gran Premio di Arabia Saudita"@it ;
+            rdfs:label "Arabia2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Arabia2022
+:Arabia2022 rdf:type owl:NamedIndividual ,
+                     :Gara ;
+            :gpv :Leclerc ;
+            :haPoleSitter :Perez ;
+            :haScuderiaVincitore :RedBull ;
+            :haVincitore :Verstappen ;
+            :tenutaPresso :JeddahCornicheCircuit ;
+            rdfs:comment "Gara che si è svolta in occasione dell'edizione 2022 del Gran Premio di Arabia Saudita"@it ;
+            rdfs:label "Arabia2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Aragon
+:Aragon rdf:type owl:NamedIndividual ,
+                 :Circuito ;
+        rdfs:comment "circuito di Aragon, in Spagna"@it ;
+        rdfs:label "Aragon"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#AstonMartin
+:AstonMartin rdf:type owl:NamedIndividual ,
+                      :ScuderiaCliente ;
+             :partecipa :campionato2021 ,
+                        :campionato2022 ;
+             rdfs:comment "squadra corse Aston Martin, conosciuta fino al 2020 come Racing Point"@it ;
+             rdfs:label "AstonMartin"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Australia2022
+:Australia2022 rdf:type owl:NamedIndividual ,
+                        :Gara ;
+               :gpv :Leclerc ;
+               :haPoleSitter :Leclerc ;
+               :haScuderiaVincitore :Ferrari ;
+               :haVincitore :Leclerc ;
+               :tenutaPresso :AlbertPark ;
+               rdfs:comment "Gara che si è svolta in occasione dell'edizione 2022 del Gran Premio di Australia"@it ;
+               rdfs:label "Australia2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Austria2020
+:Austria2020 rdf:type owl:NamedIndividual ,
+                      :Gara ;
+             :gpv :Norris ;
+             :haPoleSitter :Bottas ;
+             :haScuderiaVincitore :Mercedes ;
+             :haVincitore :Bottas ;
+             :tenutaPresso :RedBullRing ;
+             rdfs:comment "Gara che si è svolta in occasione dell'edizione 2020 del Gran Premio di Austria"@it ;
+             rdfs:label "Austria2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Austria2021
+:Austria2021 rdf:type owl:NamedIndividual ,
+                      :Gara ;
+             :gpv :Verstappen ;
+             :haPoleSitter :Verstappen ;
+             :haScuderiaVincitore :RedBull ;
+             :haVincitore :Verstappen ;
+             :tenutaPresso :RedBullRing ;
+             rdfs:comment "Gara che si è svolta in occasione dell'edizione 2021 del Gran Premio di Austria"@it ;
+             rdfs:label "Austria2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Austria2022
+:Austria2022 rdf:type owl:NamedIndividual ,
+                      :Gara ;
+             :gpv :Verstappen ;
+             :haPoleSitter :Verstappen ;
+             :haScuderiaVincitore :Ferrari ;
+             :haVincitore :Leclerc ;
+             :tenutaPresso :RedBullRing ;
+             rdfs:comment "Gara che si è svolta in occasione dell'edizione 2022 del Gran Premio di Austria"@it ;
+             rdfs:label "Austria2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#AutodromoEnzoDinoFerrari
+:AutodromoEnzoDinoFerrari rdf:type owl:NamedIndividual ,
+                                   :Circuito ;
+                          :lunghezza "4909"^^xsd:int ;
+                          :trackRecord "1:15:484" ;
+                          rdfs:comment "Autodromo cittadino di Imola dedicato a Enzo e Dino Ferrari"@it ;
+                          rdfs:label "AutodromoEnzoDinoFerrari"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#AutodromoHermanosRodriguez
+:AutodromoHermanosRodriguez rdf:type owl:NamedIndividual ,
+                                     :Circuito ;
+                            :lunghezza "4304"^^xsd:int ;
+                            :trackRecord "1:17:774" ;
+                            rdfs:comment "Autodromo del Messico dedicato ai fratelli Rodriguez"@it ;
+                            rdfs:label "AutodromoHermanosRodriguez"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Azerbaijan2021
+:Azerbaijan2021 rdf:type owl:NamedIndividual ,
+                         :Gara ;
+                :gpv :Verstappen ;
+                :haPoleSitter :Leclerc ;
+                :haScuderiaVincitore :RedBull ;
+                :haVincitore :Perez ;
+                :tenutaPresso :BakuStreetCircuit ;
+                rdfs:comment "Gara che si è svolta in occasione dell'edizione 2021 del Gran Premio di Azerbaijan"@it ;
+                rdfs:label "Azerbaijan2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Azerbaijan2022
+:Azerbaijan2022 rdf:type owl:NamedIndividual ,
+                         :Gara ;
+                :gpv :Perez ;
+                :haPoleSitter :Leclerc ;
+                :haScuderiaVincitore :RedBull ;
+                :haVincitore :Verstappen ;
+                :tenutaPresso :BakuStreetCircuit ;
+                rdfs:comment "Gara che si è svolta in occasione dell'edizione 2022 del Gran Premio di Azerbaijan"@it ;
+                rdfs:label "Azerbaijan2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Bahrain2020
+:Bahrain2020 rdf:type owl:NamedIndividual ,
+                      :Gara ;
+             :gpv :Verstappen ;
+             :haPoleSitter :Hamilton ;
+             :haScuderiaVincitore :Mercedes ;
+             :haVincitore :Hamilton ;
+             :tenutaPresso :BahrainCircuit ;
+             rdfs:comment "Gara che si è svolta in occasione dell'edizione 2020 del Gran Premio del Bahrain"@it ;
+             rdfs:label "Bahrain2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Bahrain2021
+:Bahrain2021 rdf:type owl:NamedIndividual ,
+                      :Gara ;
+             :gpv :Bottas ;
+             :haPoleSitter :Verstappen ;
+             :haScuderiaVincitore :Mercedes ;
+             :haVincitore :Hamilton ;
+             :tenutaPresso :BahrainCircuit ;
+             rdfs:comment "Gara che si è svolta in occasione dell'edizione 2021 del Gran Premio del Bahrain"@it ;
+             rdfs:label "Bahrain2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Bahrain2022
+:Bahrain2022 rdf:type owl:NamedIndividual ,
+                      :Gara ;
+             :gpv :Leclerc ;
+             :haPoleSitter :Leclerc ;
+             :haScuderiaVincitore :Ferrari ;
+             :haVincitore :Leclerc ;
+             :tenutaPresso :BahrainCircuit ;
+             rdfs:comment "Gara che si è svolta in occasione dell'edizione 2022 del Gran Premio del Bahrain"@it ;
+             rdfs:label "Bahrain2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#BahrainCircuit
+:BahrainCircuit rdf:type owl:NamedIndividual ,
+                         :Circuito ;
+                :lunghezza "5412"^^xsd:int ;
+                rdfs:comment "Circuito internazionale del Bahrain"@it ;
+                rdfs:label "BahrainCircuit"@it .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource :BahrainCircuit ;
+   owl:annotatedProperty :lunghezza ;
+   owl:annotatedTarget "5412"^^xsd:int ;
+   rdfs:comment "Lunghezza della configurazione standard utilizzata in F1. Nella stagione 2010 venne utilizzata la configurazione dell'Endurance Circuit, lunga 6.299 metri, mentre nel 2020 venne utilizzata anche la configurazione chiamata Outer Circuit, di 3.543 metri"@it
+ ] .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#BakuStreetCircuit
+:BakuStreetCircuit rdf:type owl:NamedIndividual ,
+                            :Circuito ;
+                   :lunghezza "6003"^^xsd:int ;
+                   :trackRecord "1:40:209" ;
+                   rdfs:comment "circuito cittadino di Baku, in Azerbaijan"@it ;
+                   rdfs:label "BakuStreetCircuit"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#BarcelonaCatalunya
+:BarcelonaCatalunya rdf:type owl:NamedIndividual ,
+                             :Circuito ;
+                    :lunghezza "4657"^^xsd:int ;
+                    :trackRecord "1:16:330" ;
+                    rdfs:comment "circuito di Barcellona-Catalunya, in Spagna"@it ;
+                    rdfs:label "BarcelonaCatalunya"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Belgio2020
+:Belgio2020 rdf:type owl:NamedIndividual ,
+                     :Gara ;
+            :gpv :Ricciardo ;
+            :haPoleSitter :Hamilton ;
+            :haScuderiaVincitore :Mercedes ;
+            :haVincitore :Hamilton ;
+            :tenutaPresso :SpaFrancorchamps ;
+            rdfs:comment "Gara che si è svolta in occasione dell'edizione 2020 del Gran Premio del Belgio"@it ;
+            rdfs:label "Belgio2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Belgio2021
+:Belgio2021 rdf:type owl:NamedIndividual ,
+                     :Gara ;
+            :haPoleSitter :Verstappen ;
+            :haScuderiaVincitore :RedBull ;
+            :haVincitore :Verstappen ;
+            :tenutaPresso :SpaFrancorchamps ;
+            rdfs:comment "Gara che si è svolta in occasione dell'edizione 2021 del Gran Premio del Belgio"@it ,
+                         "La gara si considera valida da protocollo ma il giro più veloce, in origine attribuito a Mazepin, non viene assegnato perché la gara non ha mai visto alcun giro a regime di bandiera verde, ma solamente con Safety Car"@it ;
+            rdfs:label "Belgio2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Belgio2022
+:Belgio2022 rdf:type owl:NamedIndividual ,
+                     :Gara ;
+            :gpv :Verstappen ;
+            :haPoleSitter :Sainz ;
+            :haScuderiaVincitore :RedBull ;
+            :haVincitore :Verstappen ;
+            :tenutaPresso :SpaFrancorchamps ;
+            rdfs:comment "Gara che si è svolta in occasione dell'edizione 2022 del Gran Premio del Belgio"@it ;
+            rdfs:label "Belgio2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Bottas
+:Bottas rdf:type owl:NamedIndividual ,
+                 :Pilota ;
+        :compagnoDiTeam :Zhou ;
+        :correPer :AlfaRomeoSauber ;
+        :detieneTrackRecord :AutodromoHermanosRodriguez ,
+                            :CircuitGillesVilleneuve ,
+                            :Interlagos ,
+                            :SpaFrancorchamps ;
+        :numeroDiGara "77"^^xsd:int ;
+        :sigla "BOT" ;
+        rdfs:comment "Valtteri Bottas, pilota finlandese di F1"@it ;
+        rdfs:label "Bottas"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#BrandsHatch
+:BrandsHatch rdf:type owl:NamedIndividual ,
+                      :Circuito ;
+             rdfs:comment "circuito di Brands Hatch, in Inghilterra"@it ;
+             rdfs:label "BrandsHatch"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Brno
+:Brno rdf:type owl:NamedIndividual ,
+               :Circuito ;
+      rdfs:comment "circuito di Brno, in Repubblica Ceca"@it ;
+      rdfs:label "Brno"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#BuddhCircuit
+:BuddhCircuit rdf:type owl:NamedIndividual ,
+                       :Circuito ;
+              rdfs:comment "circuito internazionale di Greater Noida, in India"@it ;
+              rdfs:label "BuddhCircuit"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Canada2022
+:Canada2022 rdf:type owl:NamedIndividual ,
+                     :Gara ;
+            :gpv :Sainz ;
+            :haPoleSitter :Verstappen ;
+            :haScuderiaVincitore :RedBull ;
+            :haVincitore :Verstappen ;
+            :tenutaPresso :CircuitGillesVilleneuve ;
+            rdfs:comment "Gara che si è svolta in occasione dell'edizione 2022 del Gran Premio del Canada"@it ;
+            rdfs:label "Canada2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#CircuitDeLaSarthe
+:CircuitDeLaSarthe rdf:type owl:NamedIndividual ,
+                            :Circuito ;
+                   rdfs:comment "circuito di Le Mans in Francia, su cui si disputa la famosissima 24 ore"@it ;
+                   rdfs:label "CircuitDeLaSarthe"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#CircuitGillesVilleneuve
+:CircuitGillesVilleneuve rdf:type owl:NamedIndividual ,
+                                  :Circuito ;
+                         :lunghezza "4361"^^xsd:int ;
+                         :trackRecord "1:13:078" ;
+                         rdfs:comment "circuito cittadino di Montreal intitolato a Gilles Villeneuve"@it ;
+                         rdfs:label "CircuitGillesVilleneuve"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#CircuitOfTheAmericas
+:CircuitOfTheAmericas rdf:type owl:NamedIndividual ,
+                               :Circuito ;
+                      :lunghezza "5513"^^xsd:int ;
+                      :trackRecord "1:36:169" ;
+                      rdfs:comment "circuito degli Stati Uniti, situato ad Austin"@it ;
+                      rdfs:label "CircuitOfTheAmericas"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#CittàDelMessico2021
+:CittàDelMessico2021 rdf:type owl:NamedIndividual ,
+                              :Gara ;
+                     :gpv :Bottas ;
+                     :haPoleSitter :Bottas ;
+                     :haScuderiaVincitore :RedBull ;
+                     :haVincitore :Verstappen ;
+                     :tenutaPresso :AutodromoHermanosRodriguez ;
+                     rdfs:comment "Gara che si è svolta in occasione dell'edizione 2021 del Gran Premio di Città del Messico"@it ;
+                     rdfs:label "CittàDelMessico2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#CittàDelMessico2022
+:CittàDelMessico2022 rdf:type owl:NamedIndividual ,
+                              :Gara ;
+                     :gpv :Russell ;
+                     :haPoleSitter :Verstappen ;
+                     :haScuderiaVincitore :RedBull ;
+                     :haVincitore :Verstappen ;
+                     :tenutaPresso :AutodromoHermanosRodriguez ;
+                     rdfs:comment "Gara che si è svolta in occasione dell'edizione 2022 del Gran Premio di Città del Messico"@it ;
+                     rdfs:label "CittàDelMessico2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#DeVries
+:DeVries rdf:type owl:NamedIndividual ,
+                  :Pilota ;
+         :numeroDiGara "21"^^xsd:int ;
+         :sigla "DEV" ;
+         rdfs:comment "Nyck DeVries, pilota olandese di F1"@it ;
+         rdfs:label "DeVries"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Digione
+:Digione rdf:type owl:NamedIndividual ,
+                  :Circuito ;
+         rdfs:comment "circuito di Digione, in Francia"@it ;
+         rdfs:label "Digione"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#DoningtonPark
+:DoningtonPark rdf:type owl:NamedIndividual ,
+                        :Circuito ;
+               rdfs:comment "circuito di Donington, in Inghilterra"@it ;
+               rdfs:label "DoningtonPark"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Eifel2020
+:Eifel2020 rdf:type owl:NamedIndividual ,
+                    :Gara ;
+           :gpv :Verstappen ;
+           :haPoleSitter :Bottas ;
+           :haScuderiaVincitore :Mercedes ;
+           :haVincitore :Hamilton ;
+           :tenutaPresso :Nurburgring ;
+           rdfs:comment "Gara che si è svolta in occasione dell'edizione 2020 del Gran Premio dell'Eifel"@it ;
+           rdfs:label "Eifel2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#EmiliaRomagna2020
+:EmiliaRomagna2020 rdf:type owl:NamedIndividual ,
+                            :Gara ;
+                   :gpv :Hamilton ;
+                   :haPoleSitter :Bottas ;
+                   :haScuderiaVincitore :Mercedes ;
+                   :haVincitore :Hamilton ;
+                   :tenutaPresso :AutodromoEnzoDinoFerrari ;
+                   rdfs:comment "Gara che si è svolta in occasione dell'edizione 2020 del Gran Premio dell'Emilia Romagna"@it ;
+                   rdfs:label "EmiliaRomagna2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#EmiliaRomagna2021
+:EmiliaRomagna2021 rdf:type owl:NamedIndividual ,
+                            :Gara ;
+                   :gpv :Hamilton ;
+                   :haPoleSitter :Hamilton ;
+                   :haScuderiaVincitore :RedBull ;
+                   :haVincitore :Verstappen ;
+                   :tenutaPresso :AutodromoEnzoDinoFerrari ;
+                   rdfs:comment "Gara che si è svolta in occasione dell'edizione 2021 del Gran Premio dell'Emilia Romagna"@it ;
+                   rdfs:label "EmiliaRomagna2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#EmiliaRomagna2022
+:EmiliaRomagna2022 rdf:type owl:NamedIndividual ,
+                            :Gara ;
+                   :gpv :Verstappen ;
+                   :haPoleSitter :Verstappen ;
+                   :haScuderiaVincitore :RedBull ;
+                   :haVincitore :Verstappen ;
+                   :tenutaPresso :AutodromoEnzoDinoFerrari ;
+                   rdfs:comment "Gara che si è svolta in occasione dell'edizione 2022 del Gran Premio dell'Emilia Romagna"@it ;
+                   rdfs:label "EmiliaRomagna2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#EstorilCircuit
+:EstorilCircuit rdf:type owl:NamedIndividual ,
+                         :Circuito ;
+                rdfs:comment "circuito di Estoril, in Portogallo"@it ;
+                rdfs:label "EstorilCircuit"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Ferrari
+:Ferrari rdf:type owl:NamedIndividual ,
+                  :ScuderiaCostruttore ;
+         :fornisceMotore :AlfaRomeoSauber ,
+                         :Haas ;
+         :partecipa :campionato2020 ,
+                    :campionato2021 ,
+                    :campionato2022 ;
+         rdfs:comment "squadra corse Ferrari, la più antica e vincente scuderia di F1"@it ;
+         rdfs:label "Ferrari"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Fiorano
+:Fiorano rdf:type owl:NamedIndividual ,
+                  :Circuito ;
+         rdfs:comment "circuito di Fiorano Modenese presso la sede Ferrari"@it ;
+         rdfs:label "Fiorano"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Francia2021
+:Francia2021 rdf:type owl:NamedIndividual ,
+                      :Gara ;
+             :gpv :Verstappen ;
+             :haPoleSitter :Verstappen ;
+             :haScuderiaVincitore :RedBull ;
+             :haVincitore :Verstappen ;
+             :tenutaPresso :PaulRicard ;
+             rdfs:comment "Gara che si è svolta in occasione dell'edizione 2021 del Gran Premio di Francia"@it ;
+             rdfs:label "Francia2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Francia2022
+:Francia2022 rdf:type owl:NamedIndividual ,
+                      :Gara ;
+             :gpv :Sainz ;
+             :haPoleSitter :Leclerc ;
+             :haScuderiaVincitore :RedBull ;
+             :haVincitore :Verstappen ;
+             :tenutaPresso :PaulRicard ;
+             rdfs:comment "Gara che si è svolta in occasione dell'edizione 2022 del Gran Premio di Francia"@it ;
+             rdfs:label "Francia2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#FujiSpeedway
+:FujiSpeedway rdf:type owl:NamedIndividual ,
+                       :Circuito ;
+              rdfs:comment "circuito del Fuji, in Giappone"@it ;
+              rdfs:label "FujiSpeedway"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Gasly
+:Gasly rdf:type owl:NamedIndividual ,
+                :Pilota ;
+       :compagnoDiTeam :Ocon ;
+       :correPer :Alpine ;
+       :numeroDiGara "10"^^xsd:int ;
+       :sigla "GAS" ;
+       rdfs:comment "Pierre Gasly, pilota francese di F1"@it ;
+       rdfs:label "Gasly"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Giappone2022
+:Giappone2022 rdf:type owl:NamedIndividual ,
+                       :Gara ;
+              :gpv :Zhou ;
+              :haPoleSitter :Verstappen ;
+              :haScuderiaVincitore :RedBull ;
+              :haVincitore :Verstappen ;
+              :tenutaPresso :Suzuka ;
+              rdfs:comment "Gara che si è svolta in occasione dell'edizione 2022 del Gran Premio del Giappone"@it ;
+              rdfs:label "Giappone2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Gp70Anniversario
+:Gp70Anniversario rdf:type owl:NamedIndividual ,
+                           :GranPremio ;
+                  rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+                  rdfs:label "Gp70Anniversario"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Gp70Anniversario2020
+:Gp70Anniversario2020 rdf:type owl:NamedIndividual ,
+                               :Evento ;
+                      :edizioneDi :Gp70Anniversario ;
+                      :eventoDi :campionato2020 ;
+                      :faSvolgere <http://www.valbormida.it/attilio/f1.owl#70anniversario2020> ;
+                      :precede :GpSpagna2020 ;
+                      :segue :GpGranBretagna2020 ;
+                      rdfs:comment "edizione 2020 del Gran Premio del 70° anniversario"@it ;
+                      rdfs:label "Gp70Anniversario2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpAbuDhabi
+:GpAbuDhabi rdf:type owl:NamedIndividual ,
+                     :GranPremio ;
+            rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+            rdfs:label "GpAbuDhabi"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpAbuDhabi2020
+:GpAbuDhabi2020 rdf:type owl:NamedIndividual ,
+                         :Evento ;
+                :edizioneDi :GpAbuDhabi ;
+                :eventoDi :campionato2020 ;
+                :faSvolgere :AbuDhabi2020 ;
+                :segue :GpSakhir2020 ;
+                rdfs:comment "edizione 2020 del Gran Premio di Abu Dhabi"@it ;
+                rdfs:label "GpAbuDhabi2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpAbuDhabi2021
+:GpAbuDhabi2021 rdf:type owl:NamedIndividual ,
+                         :Evento ;
+                :edizioneDi :GpAbuDhabi ;
+                :eventoDi :campionato2021 ;
+                :faSvolgere :AbuDhabi2021 ;
+                :segue :GpArabia2021 ;
+                rdfs:comment "edizione 2021 del Gran Premio di Abu Dhabi"@it ;
+                rdfs:label "GpAbuDhabi2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpAbuDhabi2022
+:GpAbuDhabi2022 rdf:type owl:NamedIndividual ,
+                         :Evento ;
+                :edizioneDi :GpAbuDhabi ;
+                :eventoDi :campionato2022 ;
+                :faSvolgere :AbuDhabi2022 ;
+                :segue :GpSanPaolo2022 ;
+                rdfs:comment "edizione 2022 del Gran Premio di Abu Dhabi"@it ;
+                rdfs:label "GpAbuDhabi2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpArabia
+:GpArabia rdf:type owl:NamedIndividual ,
+                   :GranPremio ;
+          rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+          rdfs:label "GpArabia"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpArabia2021
+:GpArabia2021 rdf:type owl:NamedIndividual ,
+                       :Evento ;
+              :edizioneDi :GpArabia ;
+              :eventoDi :campionato2021 ;
+              :faSvolgere :Arabia2021 ;
+              :precede :GpAbuDhabi2021 ;
+              :segue :GpQatar2021 ;
+              rdfs:comment "edizione 2021 del Gran Premio di Arabia"@it ;
+              rdfs:label "GpArabia2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpArabia2022
+:GpArabia2022 rdf:type owl:NamedIndividual ,
+                       :Evento ;
+              :edizioneDi :GpArabia ;
+              :eventoDi :campionato2022 ;
+              :faSvolgere :Arabia2022 ;
+              :precede :GpAustralia2022 ;
+              :segue :GpBahrain2022 ;
+              rdfs:comment "edizione 2022 del Gran Premio di Arabia"@it ;
+              rdfs:label "GpArabia2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpAustralia
+:GpAustralia rdf:type owl:NamedIndividual ,
+                      :GranPremio ;
+             rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+             rdfs:label "GpAustralia"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpAustralia2022
+:GpAustralia2022 rdf:type owl:NamedIndividual ,
+                          :Evento ;
+                 :edizioneDi :GpAustralia ;
+                 :eventoDi :campionato2022 ;
+                 :faSvolgere :Australia2022 ;
+                 :precede :GpEmiliaRomagna2022 ;
+                 :segue :GpArabia2022 ;
+                 rdfs:comment "edizione 2022 del Gran Premio di Australia"@it ;
+                 rdfs:label "GpAustralia2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpAustria
+:GpAustria rdf:type owl:NamedIndividual ,
+                    :GranPremio ;
+           rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+           rdfs:label "GpAustria"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpAustria2020
+:GpAustria2020 rdf:type owl:NamedIndividual ,
+                        :Evento ;
+               :edizioneDi :GpAustria ;
+               :eventoDi :campionato2020 ;
+               :faSvolgere :Austria2020 ;
+               :precede :GpStiria2020 ;
+               rdfs:comment "edizione 2020 del Gran Premio di Austria"@it ;
+               rdfs:label "GpAustria2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpAustria2021
+:GpAustria2021 rdf:type owl:NamedIndividual ,
+                        :Evento ;
+               :edizioneDi :GpAustria ;
+               :eventoDi :campionato2021 ;
+               :faSvolgere :Austria2021 ;
+               :precede :GpGranBretagna2021 ;
+               :segue :GpStiria2021 ;
+               rdfs:comment "edizione 2021 del Gran Premio di Austria"@it ;
+               rdfs:label "GpAustria2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpAustria2022
+:GpAustria2022 rdf:type owl:NamedIndividual ,
+                        :Evento ;
+               :edizioneDi :GpAustria ;
+               :eventoDi :campionato2022 ;
+               :faSvolgere :Austria2022 ;
+               :precede :GpFrancia2022 ;
+               :segue :GpGranBretagna2022 ;
+               rdfs:comment "edizione 2022 del Gran Premio di Austria"@it ;
+               rdfs:label "GpAustria2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpAzerbaijan
+:GpAzerbaijan rdf:type owl:NamedIndividual ,
+                       :GranPremio ;
+              rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+              rdfs:label "GpAzerbaijan"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpAzerbaijan2021
+:GpAzerbaijan2021 rdf:type owl:NamedIndividual ,
+                           :Evento ;
+                  :edizioneDi :GpAzerbaijan ;
+                  :eventoDi :campionato2021 ;
+                  :faSvolgere :Azerbaijan2021 ;
+                  :precede :GpFrancia2021 ;
+                  :segue :GpMonaco2021 ;
+                  rdfs:comment "edizione 2021 del Gran Premio di Azerbaijan"@it ;
+                  rdfs:label "GpAzerbaijan2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpAzerbaijan2022
+:GpAzerbaijan2022 rdf:type owl:NamedIndividual ,
+                           :Evento ;
+                  :edizioneDi :GpAzerbaijan ;
+                  :eventoDi :campionato2022 ;
+                  :faSvolgere :Azerbaijan2022 ;
+                  :precede :GpCanada2022 ;
+                  rdfs:comment "edizione 2022 del Gran Premio di Azerbaijan"@it ;
+                  rdfs:label "GpAzerbaijan2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpBahrain
+:GpBahrain rdf:type owl:NamedIndividual ,
+                    :GranPremio ;
+           rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+           rdfs:label "GpBahrain"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpBahrain2020
+:GpBahrain2020 rdf:type owl:NamedIndividual ,
+                        :Evento ;
+               :edizioneDi :GpBahrain ;
+               :eventoDi :campionato2020 ;
+               :faSvolgere :Bahrain2020 ;
+               :precede :GpSakhir2020 ;
+               :segue :GpTurchia2020 ;
+               rdfs:comment "edizione 2020 del Gran Premio del Bahrain"@it ;
+               rdfs:label "GpBahrain2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpBahrain2021
+:GpBahrain2021 rdf:type owl:NamedIndividual ,
+                        :Evento ;
+               :edizioneDi :GpBahrain ;
+               :eventoDi :campionato2021 ;
+               :faSvolgere :Bahrain2021 ;
+               :precede :GpEmiliaRomagna2021 ;
+               rdfs:comment "edizione 2021 del Gran Premio del Bahrain"@it ;
+               rdfs:label "GpBahrain2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpBahrain2022
+:GpBahrain2022 rdf:type owl:NamedIndividual ,
+                        :Evento ;
+               :edizioneDi :GpBahrain ;
+               :eventoDi :campionato2022 ;
+               :faSvolgere :Bahrain2022 ;
+               :precede :GpArabia2022 ;
+               rdfs:comment "edizione 2022 del Gran Premio del Bahrain"@it ;
+               rdfs:label "GpBahrain2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpBelgio
+:GpBelgio rdf:type owl:NamedIndividual ,
+                   :GranPremio ;
+          rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+          rdfs:label "GpBelgio"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpBelgio2020
+:GpBelgio2020 rdf:type owl:NamedIndividual ,
+                       :Evento ;
+              :edizioneDi :GpBelgio ;
+              :eventoDi :campionato2020 ;
+              :faSvolgere :Belgio2020 ;
+              :precede :GpItalia2020 ;
+              :segue :GpSpagna2020 ;
+              rdfs:comment "edizione 2020 del Gran Premio del Belgio"@it ;
+              rdfs:label "GpBelgio2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpBelgio2021
+:GpBelgio2021 rdf:type owl:NamedIndividual ,
+                       :Evento ;
+              :edizioneDi :GpBelgio ;
+              :eventoDi :campionato2021 ;
+              :faSvolgere :Belgio2021 ;
+              :precede :GpOlanda2021 ;
+              :segue :GpUngheria2021 ;
+              rdfs:comment "edizione 2021 del Gran Premio del Belgio"@it ;
+              rdfs:label "GpBelgio2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpBelgio2022
+:GpBelgio2022 rdf:type owl:NamedIndividual ,
+                       :Evento ;
+              :edizioneDi :GpBelgio ;
+              :eventoDi :campionato2022 ;
+              :faSvolgere :Belgio2022 ;
+              :precede :GpOlanda2022 ;
+              :segue :GpUngheria2022 ;
+              rdfs:comment "edizione 2022 del Gran Premio del Belgio"@it ;
+              rdfs:label "GpBelgio2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpBrasile
+:GpBrasile rdf:type owl:NamedIndividual ,
+                    :GranPremio ;
+           rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+           rdfs:label "GpBrasile"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpCanada
+:GpCanada rdf:type owl:NamedIndividual ,
+                   :GranPremio ;
+          rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+          rdfs:label "GpCanada"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpCanada2022
+:GpCanada2022 rdf:type owl:NamedIndividual ,
+                       :Evento ;
+              :edizioneDi :GpCanada ;
+              :eventoDi :campionato2022 ;
+              :faSvolgere :Canada2022 ;
+              :precede :GpGranBretagna2022 ;
+              :segue :GpAzerbaijan2022 ;
+              rdfs:comment "edizione 2022 del Gran Premio del Canada"@it ;
+              rdfs:label "GpCanada2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpCina
+:GpCina rdf:type owl:NamedIndividual ,
+                 :GranPremio ;
+        rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+        rdfs:label "GpCina"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpCittàDelMessico
+:GpCittàDelMessico rdf:type owl:NamedIndividual ,
+                            :GranPremio ;
+                   rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+                   rdfs:label "GpCittàDelMessico"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpCittàDelMessico2021
+:GpCittàDelMessico2021 rdf:type owl:NamedIndividual ,
+                                :Evento ;
+                       :edizioneDi :GpCittàDelMessico ;
+                       :eventoDi :campionato2021 ;
+                       :faSvolgere :CittàDelMessico2021 ;
+                       :precede :GpSanPaolo2021 ;
+                       :segue :GpStatiUniti2021 ;
+                       rdfs:comment "edizione 2021 del Gran Premio di Città del Messico"@it ;
+                       rdfs:label "GpCittàDelMessico2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpCittàDelMessico2022
+:GpCittàDelMessico2022 rdf:type owl:NamedIndividual ,
+                                :Evento ;
+                       :edizioneDi :GpCittàDelMessico ;
+                       :eventoDi :campionato2022 ;
+                       :faSvolgere :CittàDelMessico2022 ;
+                       :precede :GpSanPaolo2022 ;
+                       :segue :GpStatiUniti2022 ;
+                       rdfs:comment "edizione 2022 del Gran Premio di Città del Messico"@it ;
+                       rdfs:label "GpCittàDelMessico2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpCorea
+:GpCorea rdf:type owl:NamedIndividual ,
+                  :GranPremio ;
+         rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+         rdfs:label "GpCorea"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpEifel
+:GpEifel rdf:type owl:NamedIndividual ,
+                  :GranPremio ;
+         rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+         rdfs:label "GpEifel"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpEifel2020
+:GpEifel2020 rdf:type owl:NamedIndividual ,
+                      :Evento ;
+             :edizioneDi :GpEifel ;
+             :eventoDi :campionato2020 ;
+             :faSvolgere :Eifel2020 ;
+             :precede :GpPortogallo2020 ;
+             :segue :GpRussia2020 ;
+             rdfs:comment "edizione 2020 del Gran Premio dell'Eifel"@it ;
+             rdfs:label "GpEifel2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpEmiliaRomagna
+:GpEmiliaRomagna rdf:type owl:NamedIndividual ,
+                          :GranPremio ;
+                 rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+                 rdfs:label "GpEmiliaRomagna"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpEmiliaRomagna2020
+:GpEmiliaRomagna2020 rdf:type owl:NamedIndividual ,
+                              :Evento ;
+                     :edizioneDi :GpEmiliaRomagna ;
+                     :eventoDi :campionato2020 ;
+                     :faSvolgere :EmiliaRomagna2020 ;
+                     :precede :GpTurchia2020 ;
+                     :segue :GpPortogallo2020 ;
+                     rdfs:comment "edizione 2020 del Gran Premio dell'Emilia Romagna"@it ;
+                     rdfs:label "GpEmiliaRomagna2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpEmiliaRomagna2021
+:GpEmiliaRomagna2021 rdf:type owl:NamedIndividual ,
+                              :Evento ;
+                     :edizioneDi :GpEmiliaRomagna ;
+                     :eventoDi :campionato2021 ;
+                     :faSvolgere :EmiliaRomagna2021 ;
+                     :precede :GpPortogallo2021 ;
+                     :segue :GpBahrain2021 ;
+                     rdfs:comment "edizione 2021 del Gran Premio dell'Emilia Romagna"@it ;
+                     rdfs:label "GpEmiliaRomagna2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpEmiliaRomagna2022
+:GpEmiliaRomagna2022 rdf:type owl:NamedIndividual ,
+                              :Evento ;
+                     :edizioneDi :GpEmiliaRomagna ;
+                     :eventoDi :campionato2022 ;
+                     :faSvolgere :EmiliaRomagna2022 ;
+                     :precede :GpMiami2022 ;
+                     :segue :GpAustralia2022 ;
+                     rdfs:comment "edizione 2022 del Gran Premio dell'Emilia Romagna"@it ;
+                     rdfs:label "GpEmiliaRomagna2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpEuropa
+:GpEuropa rdf:type owl:NamedIndividual ,
+                   :GranPremio ;
+          rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+          rdfs:label "GpEuropa"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpFrancia
+:GpFrancia rdf:type owl:NamedIndividual ,
+                    :GranPremio ;
+           rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+           rdfs:label "GpFrancia"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpFrancia2021
+:GpFrancia2021 rdf:type owl:NamedIndividual ,
+                        :Evento ;
+               :edizioneDi :GpFrancia ;
+               :eventoDi :campionato2021 ;
+               :faSvolgere :Francia2021 ;
+               :precede :GpStiria2021 ;
+               :segue :GpAzerbaijan2021 ;
+               rdfs:comment "edizione 2021 del Gran Premio di Francia"@it ;
+               rdfs:label "GpFrancia2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpFrancia2022
+:GpFrancia2022 rdf:type owl:NamedIndividual ,
+                        :Evento ;
+               :edizioneDi :GpFrancia ;
+               :eventoDi :campionato2022 ;
+               :faSvolgere :Francia2022 ;
+               :precede :GpUngheria2022 ;
+               :segue :GpAustria2022 ;
+               rdfs:comment "edizione 2022 del Gran Premio di Francia"@it ;
+               rdfs:label "GpFrancia2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpGermania
+:GpGermania rdf:type owl:NamedIndividual ,
+                     :GranPremio ;
+            rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+            rdfs:label "GpGermania"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpGiappone
+:GpGiappone rdf:type owl:NamedIndividual ,
+                     :GranPremio ;
+            rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+            rdfs:label "GpGiappone"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpGiappone2022
+:GpGiappone2022 rdf:type owl:NamedIndividual ,
+                         :Evento ;
+                :edizioneDi :GpGiappone ;
+                :eventoDi :campionato2022 ;
+                :faSvolgere :Giappone2022 ;
+                :precede :GpStatiUniti2022 ;
+                :segue :GpSingapore2022 ;
+                rdfs:comment "edizione 2022 del Gran Premio del Giappone"@it ;
+                rdfs:label "GpGiappone2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpGranBretagna
+:GpGranBretagna rdf:type owl:NamedIndividual ,
+                         :GranPremio ;
+                rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+                rdfs:label "GpGranBretagna"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpGranBretagna2020
+:GpGranBretagna2020 rdf:type owl:NamedIndividual ,
+                             :Evento ;
+                    :edizioneDi :GpGranBretagna ;
+                    :eventoDi :campionato2020 ;
+                    :faSvolgere :GranBretagna2020 ;
+                    :precede :Gp70Anniversario2020 ;
+                    :segue :GpUngheria2020 ;
+                    rdfs:comment "edizione 2020 del Gran Premio di Gran Bretagna"@it ;
+                    rdfs:label "GpGranBretagna2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpGranBretagna2021
+:GpGranBretagna2021 rdf:type owl:NamedIndividual ,
+                             :Evento ;
+                    :edizioneDi :GpGranBretagna ;
+                    :eventoDi :campionato2021 ;
+                    :faSvolgere :GranBretagna2021 ;
+                    :precede :GpUngheria2021 ;
+                    :segue :GpAustria2021 ;
+                    rdfs:comment "edizione 2021 del Gran Premio di Gran Bretagna"@it ;
+                    rdfs:label "GpGranBretagna2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpGranBretagna2022
+:GpGranBretagna2022 rdf:type owl:NamedIndividual ,
+                             :Evento ;
+                    :edizioneDi :GpGranBretagna ;
+                    :eventoDi :campionato2022 ;
+                    :faSvolgere :GranBretagna2022 ;
+                    :precede :GpAustria2022 ;
+                    :segue :GpCanada2022 ;
+                    rdfs:comment "edizione 2022 del Gran Premio di Gran Bretagna"@it ;
+                    rdfs:label "GpGranBretagna2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpIndia
+:GpIndia rdf:type owl:NamedIndividual ,
+                  :GranPremio ;
+         rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+         rdfs:label "GpIndia"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpItalia
+:GpItalia rdf:type owl:NamedIndividual ,
+                   :GranPremio ;
+          rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+          rdfs:label "GpItalia"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpItalia2020
+:GpItalia2020 rdf:type owl:NamedIndividual ,
+                       :Evento ;
+              :edizioneDi :GpItalia ;
+              :eventoDi :campionato2020 ;
+              :faSvolgere :Italia2020 ;
+              :precede :GpToscana2020 ;
+              :segue :GpBelgio2020 ;
+              rdfs:comment "edizione 2020 del Gran Premio d'Italia"@it ;
+              rdfs:label "GpItalia2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpItalia2021
+:GpItalia2021 rdf:type owl:NamedIndividual ,
+                       :Evento ;
+              :edizioneDi :GpItalia ;
+              :eventoDi :campionato2021 ;
+              :faSvolgere :Italia2021 ;
+              :precede :GpRussia2021 ;
+              :segue :GpOlanda2021 ;
+              rdfs:comment "edizione 2021 del Gran Premio d'Italia"@it ;
+              rdfs:label "GpItalia2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpItalia2022
+:GpItalia2022 rdf:type owl:NamedIndividual ,
+                       :Evento ;
+              :edizioneDi :GpItalia ;
+              :eventoDi :campionato2022 ;
+              :faSvolgere :Italia2022 ;
+              :precede :GpSingapore2022 ;
+              :segue :GpOlanda2022 ;
+              rdfs:comment "edizione 2022 del Gran Premio d'Italia"@it ;
+              rdfs:label "GpItalia2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpMalesia
+:GpMalesia rdf:type owl:NamedIndividual ,
+                    :GranPremio ;
+           rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+           rdfs:label "GpMalesia"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpMessico
+:GpMessico rdf:type owl:NamedIndividual ,
+                    :GranPremio ;
+           rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+           rdfs:label "GpMessico"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpMiami
+:GpMiami rdf:type owl:NamedIndividual ,
+                  :GranPremio ;
+         rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+         rdfs:label "GpMiami"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpMiami2022
+:GpMiami2022 rdf:type owl:NamedIndividual ,
+                      :Evento ;
+             :edizioneDi :GpMiami ;
+             :eventoDi :campionato2022 ;
+             :faSvolgere :Miami2022 ;
+             :precede :GpSpagna2022 ;
+             :segue :GpEmiliaRomagna2022 ;
+             rdfs:comment "edizione 2022 del Gran Premio di Miami"@it ;
+             rdfs:label "GpMiami2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpMonaco
+:GpMonaco rdf:type owl:NamedIndividual ,
+                   :GranPremio ;
+          rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+          rdfs:label "GpMonaco"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpMonaco2021
+:GpMonaco2021 rdf:type owl:NamedIndividual ,
+                       :Evento ;
+              :edizioneDi :GpMonaco ;
+              :eventoDi :campionato2021 ;
+              :faSvolgere :Monaco2021 ;
+              :precede :GpAzerbaijan2021 ;
+              :segue :GpSpagna2021 ;
+              rdfs:comment "edizione 2021 del Gran Premio di Monaco"@it ;
+              rdfs:label "GpMonaco2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpMonaco2022
+:GpMonaco2022 rdf:type owl:NamedIndividual ,
+                       :Evento ;
+              :edizioneDi :GpMonaco ;
+              :eventoDi :campionato2022 ;
+              :faSvolgere :Monaco2022 ;
+              :precede :GpAzerbaijan2022 ;
+              :segue :GpSpagna2022 ;
+              rdfs:comment "edizione 2022 del Gran Premio di Monaco"@it ;
+              rdfs:label "GpMonaco2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpOlanda
+:GpOlanda rdf:type owl:NamedIndividual ,
+                   :GranPremio ;
+          rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+          rdfs:label "GpOlanda"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpOlanda2021
+:GpOlanda2021 rdf:type owl:NamedIndividual ,
+                       :Evento ;
+              :edizioneDi :GpOlanda ;
+              :eventoDi :campionato2021 ;
+              :faSvolgere :Olanda2021 ;
+              :precede :GpItalia2021 ;
+              :segue :GpBelgio2021 ;
+              rdfs:comment "edizione 2021 del Gran Premio d'Olanda"@it ;
+              rdfs:label "GpOlanda2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpOlanda2022
+:GpOlanda2022 rdf:type owl:NamedIndividual ,
+                       :Evento ;
+              :edizioneDi :GpOlanda ;
+              :eventoDi :campionato2022 ;
+              :faSvolgere :Olanda2022 ;
+              :precede :GpItalia2022 ;
+              :segue :GpBelgio2022 ;
+              rdfs:comment "edizione 2022 del Gran Premio d'Olanda"@it ;
+              rdfs:label "GpOlanda2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpPortogallo
+:GpPortogallo rdf:type owl:NamedIndividual ,
+                       :GranPremio ;
+              rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+              rdfs:label "GpPortogallo"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpPortogallo2020
+:GpPortogallo2020 rdf:type owl:NamedIndividual ,
+                           :Evento ;
+                  :edizioneDi :GpPortogallo ;
+                  :eventoDi :campionato2020 ;
+                  :faSvolgere :Portogallo2020 ;
+                  :precede :GpEmiliaRomagna2020 ;
+                  :segue :GpEifel2020 ;
+                  rdfs:comment "edizione 2020 del Gran Premio del Portogallo"@it ;
+                  rdfs:label "GpPortogallo2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpPortogallo2021
+:GpPortogallo2021 rdf:type owl:NamedIndividual ,
+                           :Evento ;
+                  :edizioneDi :GpPortogallo ;
+                  :eventoDi :campionato2021 ;
+                  :faSvolgere :Portogallo2021 ;
+                  :precede :GpSpagna2021 ;
+                  :segue :GpEmiliaRomagna2021 ;
+                  rdfs:comment "edizione 2021 del Gran Premio del Portogallo"@it ;
+                  rdfs:label "GpPortogallo2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpQatar
+:GpQatar rdf:type owl:NamedIndividual ,
+                  :GranPremio ;
+         rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+         rdfs:label "GpQatar"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpQatar2021
+:GpQatar2021 rdf:type owl:NamedIndividual ,
+                      :Evento ;
+             :edizioneDi :GpQatar ;
+             :eventoDi :campionato2021 ;
+             :faSvolgere :Qatar2021 ;
+             :precede :GpArabia2021 ;
+             :segue :GpSanPaolo2021 ;
+             rdfs:comment "edizione 2021 del Gran Premio del Qatar"@it ;
+             rdfs:label "GpQatar2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpRussia
+:GpRussia rdf:type owl:NamedIndividual ,
+                   :GranPremio ;
+          rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+          rdfs:label "GpRussia"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpRussia2020
+:GpRussia2020 rdf:type owl:NamedIndividual ,
+                       :Evento ;
+              :edizioneDi :GpRussia ;
+              :eventoDi :campionato2020 ;
+              :faSvolgere :Russia2020 ;
+              :precede :GpEifel2020 ;
+              :segue :GpToscana2020 ;
+              rdfs:comment "edizione 2020 del Gran Premio di Russia"@it ;
+              rdfs:label "GpRussia2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpRussia2021
+:GpRussia2021 rdf:type owl:NamedIndividual ,
+                       :Evento ;
+              :edizioneDi :GpRussia ;
+              :eventoDi :campionato2021 ;
+              :faSvolgere :Russia2021 ;
+              :precede :GpTurchia2021 ;
+              :segue :GpItalia2021 ;
+              rdfs:comment "edizione 2021 del Gran Premio di Russia"@it ;
+              rdfs:label "GpRussia2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpSakhir
+:GpSakhir rdf:type owl:NamedIndividual ,
+                   :GranPremio ;
+          rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+          rdfs:label "GpSakhir"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpSakhir2020
+:GpSakhir2020 rdf:type owl:NamedIndividual ,
+                       :Evento ;
+              :edizioneDi :GpSakhir ;
+              :eventoDi :campionato2020 ;
+              :faSvolgere :Sakhir2020 ;
+              :precede :GpAbuDhabi2020 ;
+              :segue :GpBahrain2020 ;
+              rdfs:comment "edizione 2020 del Gran Premio di Sakhir"@it ;
+              rdfs:label "GpSakhir2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpSanMarino
+:GpSanMarino rdf:type owl:NamedIndividual ,
+                      :GranPremio ;
+             rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+             rdfs:label "GpSanMarino"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpSanPaolo
+:GpSanPaolo rdf:type owl:NamedIndividual ,
+                     :GranPremio ;
+            rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+            rdfs:label "GpSanPaolo"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpSanPaolo2021
+:GpSanPaolo2021 rdf:type owl:NamedIndividual ,
+                         :Evento ;
+                :edizioneDi :GpSanPaolo ;
+                :eventoDi :campionato2021 ;
+                :faSvolgere :SanPaolo2021 ;
+                :precede :GpQatar2021 ;
+                :segue :GpCittàDelMessico2021 ;
+                rdfs:comment "edizione 2021 del Gran Premio di San Paolo"@it ;
+                rdfs:label "GpSanPaolo2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpSanPaolo2022
+:GpSanPaolo2022 rdf:type owl:NamedIndividual ,
+                         :Evento ;
+                :edizioneDi :GpSanPaolo ;
+                :eventoDi :campionato2022 ;
+                :faSvolgere :SanPaolo2022 ;
+                :precede :GpAbuDhabi2022 ;
+                :segue :GpCittàDelMessico2022 ;
+                rdfs:comment "edizione 2022 del Gran Premio di San Paolo"@it ;
+                rdfs:label "GpSanPaolo2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpSingapore
+:GpSingapore rdf:type owl:NamedIndividual ,
+                      :GranPremio ;
+             rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+             rdfs:label "GpSingapore"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpSingapore2022
+:GpSingapore2022 rdf:type owl:NamedIndividual ,
+                          :Evento ;
+                 :edizioneDi :GpSingapore ;
+                 :eventoDi :campionato2022 ;
+                 :faSvolgere :Singapore2022 ;
+                 :precede :GpGiappone2022 ;
+                 :segue :GpItalia2022 ;
+                 rdfs:comment "edizione 2022 del Gran Premio di Singapore"@it ;
+                 rdfs:label "GpSingapore2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpSpagna
+:GpSpagna rdf:type owl:NamedIndividual ,
+                   :GranPremio ;
+          rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+          rdfs:label "GpSpagna"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpSpagna2020
+:GpSpagna2020 rdf:type owl:NamedIndividual ,
+                       :Evento ;
+              :edizioneDi :GpSpagna ;
+              :eventoDi :campionato2020 ;
+              :faSvolgere :Spagna2020 ;
+              :precede :GpBelgio2020 ;
+              :segue :Gp70Anniversario2020 ;
+              rdfs:comment "edizione 2020 del Gran Premio di Spagna"@it ;
+              rdfs:label "GpSpagna2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpSpagna2021
+:GpSpagna2021 rdf:type owl:NamedIndividual ,
+                       :Evento ;
+              :edizioneDi :GpSpagna ;
+              :eventoDi :campionato2021 ;
+              :faSvolgere :Spagna2021 ;
+              :precede :GpMonaco2021 ;
+              :segue :GpPortogallo2021 ;
+              rdfs:comment "edizione 2021 del Gran Premio di Spagna"@it ;
+              rdfs:label "GpSpagna2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpSpagna2022
+:GpSpagna2022 rdf:type owl:NamedIndividual ,
+                       :Evento ;
+              :edizioneDi :GpSpagna ;
+              :eventoDi :campionato2022 ;
+              :faSvolgere :Spagna2022 ;
+              :precede :GpMonaco2022 ;
+              :segue :GpMiami2022 ;
+              rdfs:comment "edizione 2022 del Gran Premio di Spagna"@it ;
+              rdfs:label "GpSpagna2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpStatiUniti
+:GpStatiUniti rdf:type owl:NamedIndividual ,
+                       :GranPremio ;
+              rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+              rdfs:label "GpStatiUniti"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpStatiUniti2021
+:GpStatiUniti2021 rdf:type owl:NamedIndividual ,
+                           :Evento ;
+                  :edizioneDi :GpStatiUniti ;
+                  :eventoDi :campionato2021 ;
+                  :faSvolgere :StatiUniti2021 ;
+                  :precede :GpCittàDelMessico2021 ;
+                  :segue :GpTurchia2021 ;
+                  rdfs:comment "edizione 2021 del Gran Premio degli Stati Uniti"@it ;
+                  rdfs:label "GpStatiUniti2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpStatiUniti2022
+:GpStatiUniti2022 rdf:type owl:NamedIndividual ,
+                           :Evento ;
+                  :edizioneDi :GpStatiUniti ;
+                  :eventoDi :campionato2022 ;
+                  :faSvolgere :StatiUniti2022 ;
+                  :precede :GpCittàDelMessico2022 ;
+                  :segue :GpGiappone2022 ;
+                  rdfs:comment "edizione 2022 del Gran Premio degli Stati Uniti"@it ;
+                  rdfs:label "GpStatiUniti2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpStiria
+:GpStiria rdf:type owl:NamedIndividual ,
+                   :GranPremio ;
+          rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+          rdfs:label "GpStiria"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpStiria2020
+:GpStiria2020 rdf:type owl:NamedIndividual ,
+                       :Evento ;
+              :edizioneDi :GpStiria ;
+              :eventoDi :campionato2020 ;
+              :faSvolgere :Stiria2020 ;
+              :precede :GpUngheria2020 ;
+              :segue :GpAustria2020 ;
+              rdfs:comment "edizione 2020 del Gran Premio di Stiria"@it ;
+              rdfs:label "GpStiria2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpStiria2021
+:GpStiria2021 rdf:type owl:NamedIndividual ,
+                       :Evento ;
+              :edizioneDi :GpStiria ;
+              :eventoDi :campionato2021 ;
+              :faSvolgere :Stiria2021 ;
+              :precede :GpAustria2021 ;
+              :segue :GpFrancia2021 ;
+              rdfs:comment "edizione 2021 del Gran Premio di Stiria"@it ;
+              rdfs:label "GpStiria2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpToscana
+:GpToscana rdf:type owl:NamedIndividual ,
+                    :GranPremio ;
+           rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+           rdfs:label "GpToscana"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpToscana2020
+:GpToscana2020 rdf:type owl:NamedIndividual ,
+                        :Evento ;
+               :edizioneDi :GpToscana ;
+               :eventoDi :campionato2020 ;
+               :faSvolgere :Toscana2020 ;
+               :precede :GpRussia2020 ;
+               :segue :GpItalia2020 ;
+               rdfs:comment "edizione 2020 del Gran Premio di Toscana"@it ;
+               rdfs:label "GpToscana2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpTurchia
+:GpTurchia rdf:type owl:NamedIndividual ,
+                    :GranPremio ;
+           rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+           rdfs:label "GpTurchia"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpTurchia2020
+:GpTurchia2020 rdf:type owl:NamedIndividual ,
+                        :Evento ;
+               :edizioneDi :GpTurchia ;
+               :eventoDi :campionato2020 ;
+               :faSvolgere :Turchia2020 ;
+               :precede :GpBahrain2020 ;
+               :segue :GpEmiliaRomagna2020 ;
+               rdfs:comment "edizione 2020 del Gran Premio di Turchia"@it ;
+               rdfs:label "GpTurchia2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpTurchia2021
+:GpTurchia2021 rdf:type owl:NamedIndividual ,
+                        :Evento ;
+               :edizioneDi :GpTurchia ;
+               :eventoDi :campionato2021 ;
+               :faSvolgere :Turchia2021 ;
+               :precede :GpStatiUniti2021 ;
+               :segue :GpRussia2021 ;
+               rdfs:comment "edizione 2021 del Gran Premio di Turchia"@it ;
+               rdfs:label "GpTurchia2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpUngheria
+:GpUngheria rdf:type owl:NamedIndividual ,
+                     :GranPremio ;
+            rdfs:comment "corsa automobilistica valida per il Campionato Mondiale di Formula 1"@it ;
+            rdfs:label "GpUngheria"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpUngheria2020
+:GpUngheria2020 rdf:type owl:NamedIndividual ,
+                         :Evento ;
+                :edizioneDi :GpUngheria ;
+                :eventoDi :campionato2020 ;
+                :faSvolgere :Ungheria2020 ;
+                :precede :GpGranBretagna2020 ;
+                :segue :GpStiria2020 ;
+                rdfs:comment "edizione 2020 del Gran Premio di Ungheria"@it ;
+                rdfs:label "GpUngheria2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpUngheria2021
+:GpUngheria2021 rdf:type owl:NamedIndividual ,
+                         :Evento ;
+                :edizioneDi :GpUngheria ;
+                :eventoDi :campionato2021 ;
+                :faSvolgere :Ungheria2021 ;
+                :precede :GpBelgio2021 ;
+                :segue :GpGranBretagna2021 ;
+                rdfs:comment "edizione 2021 del Gran Premio di Ungheria"@it ;
+                rdfs:label "GpUngheria2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GpUngheria2022
+:GpUngheria2022 rdf:type owl:NamedIndividual ,
+                         :Evento ;
+                :edizioneDi :GpUngheria ;
+                :eventoDi :campionato2022 ;
+                :faSvolgere :Ungheria2022 ;
+                :precede :GpBelgio2022 ;
+                :segue :GpFrancia2022 ;
+                rdfs:comment "edizione 2022 del Gran Premio di Ungheria"@it ;
+                rdfs:label "GpUngheria2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GranBretagna2020
+:GranBretagna2020 rdf:type owl:NamedIndividual ,
+                           :Gara ;
+                  :gpv :Verstappen ;
+                  :haPoleSitter :Hamilton ;
+                  :haScuderiaVincitore :Mercedes ;
+                  :haVincitore :Hamilton ;
+                  :tenutaPresso :Silverstone ;
+                  rdfs:comment "Gara che si è svolta in occasione dell'edizione 2020 del Gran Premio di Gran Bretagna"@it ;
+                  rdfs:label "GranBretagna2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GranBretagna2021
+:GranBretagna2021 rdf:type owl:NamedIndividual ,
+                           :Gara ;
+                  :gpv :Perez ;
+                  :haPoleSitter :Verstappen ;
+                  :haScuderiaVincitore :Mercedes ;
+                  :haVincitore :Hamilton ;
+                  :tenutaPresso :Silverstone ;
+                  rdfs:comment "Gara che si è svolta in occasione dell'edizione 2021 del Gran Premio di Gran Bretagna"@it ;
+                  rdfs:label "GranBretagna2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#GranBretagna2022
+:GranBretagna2022 rdf:type owl:NamedIndividual ,
+                           :Gara ;
+                  :gpv :Hamilton ;
+                  :haPoleSitter :Sainz ;
+                  :haScuderiaVincitore :Ferrari ;
+                  :haVincitore :Sainz ;
+                  :tenutaPresso :Silverstone ;
+                  rdfs:comment "Gara che si è svolta in occasione dell'edizione 2022 del Gran Premio di Gran Bretagna"@it ;
+                  rdfs:label "GranBretagna2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Haas
+:Haas rdf:type owl:NamedIndividual ,
+               :ScuderiaCliente ;
+      :partecipa :campionato2020 ,
+                 :campionato2021 ,
+                 :campionato2022 ;
+      rdfs:comment "squadra corse americana di Formula 1"@it ;
+      rdfs:label "Haas"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Hamilton
+:Hamilton rdf:type owl:NamedIndividual ,
+                   :Pilota ;
+          :compagnoDiTeam :Russell ;
+          :correPer :Mercedes ;
+          :detieneTrackRecord :Algarve ,
+                              :Hungaroring ,
+                              :JeddahCornicheCircuit ,
+                              :Montecarlo ,
+                              :Mugello ,
+                              :Sochi ,
+                              :Suzuka ,
+                              :Zandvoort ;
+          :numeroDiGara "44"^^xsd:int ;
+          :sigla "HAM" ;
+          rdfs:comment "Lewis Hamilton, pilota inglese di F1"@it ;
+          rdfs:label "Hamilton"@it .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource :Hamilton ;
+   owl:annotatedProperty :numeroDiGara ;
+   owl:annotatedTarget "44"^^xsd:int ;
+   rdfs:comment "Sceglie di correre con il suo numero di gara, il 44, anche negli anni in cui gli è concesso di usare in numero 1 riservato al campione del mondo in carica"@it
+ ] .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Hockenheimring
+:Hockenheimring rdf:type owl:NamedIndividual ,
+                         :Circuito ;
+                :lunghezza "4574"^^xsd:int ;
+                :trackRecord "1:13:780" ;
+                rdfs:comment "circuito automobilistico di Hockenheim, in Germania"@it ;
+                rdfs:label "Hockenheimring"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Hulkenberg
+:Hulkenberg rdf:type owl:NamedIndividual ,
+                     :Pilota ;
+            :correPer :Haas ;
+            :numeroDiGara "27"^^xsd:int ;
+            :sigla "HUL" ;
+            rdfs:comment "Nico Hulkenberg, pilota tedesco di F1"@it ;
+            rdfs:label "Hulkenberg"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Hungaroring
+:Hungaroring rdf:type owl:NamedIndividual ,
+                      :Circuito ;
+             :lunghezza "4381"^^xsd:int ;
+             :trackRecord "1:16:627" ;
+             rdfs:comment "circuito automobilistico di Mogyoród, in Ungheria"@it ;
+             rdfs:label "Hungaroring"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#IgoraDrive
+:IgoraDrive rdf:type owl:NamedIndividual ,
+                     :Circuito ;
+            rdfs:comment "circuito automobilistico nei pressi di San Pietroburgo, in Russia"@it ;
+            rdfs:label "IgoraDrive"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Indianapolis
+:Indianapolis rdf:type owl:NamedIndividual ,
+                       :Circuito ;
+              rdfs:comment "circuito automobilistico di Indianapolis, negli Stati Uniti"@it ;
+              rdfs:label "Indianapolis"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Interlagos
+:Interlagos rdf:type owl:NamedIndividual ,
+                     :Circuito ;
+            :lunghezza "4309"^^xsd:int ;
+            :trackRecord "1:10:540" ;
+            rdfs:comment "Circuito automobilistico di San Paolo, in Brasile"@it ;
+            rdfs:label "Interlagos"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#IstanbulPark
+:IstanbulPark rdf:type owl:NamedIndividual ,
+                       :Circuito ;
+              :lunghezza "5338"^^xsd:int ;
+              :trackRecord "1:24:770" ;
+              rdfs:comment "circuito automobilistico di Istanbul, in Turchia"@it ;
+              rdfs:label "IstanbulPark"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Italia2020
+:Italia2020 rdf:type owl:NamedIndividual ,
+                     :Gara ;
+            :gpv :Hamilton ;
+            :haPoleSitter :Hamilton ;
+            :haScuderiaVincitore :AlphaTauri ;
+            :haVincitore :Gasly ;
+            :tenutaPresso :Monza ;
+            rdfs:comment "Gara che si è svolta in occasione dell'edizione 2020 del Gran Premio d'Italia"@it ;
+            rdfs:label "Italia2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Italia2021
+:Italia2021 rdf:type owl:NamedIndividual ,
+                     :Gara ;
+            :gpv :Ricciardo ;
+            :haPoleSitter :Verstappen ;
+            :haScuderiaVincitore :McLaren ;
+            :haVincitore :Ricciardo ;
+            :tenutaPresso :Monza ;
+            rdfs:comment "Gara che si è svolta in occasione dell'edizione 2021 del Gran Premio d'Italia"@it ;
+            rdfs:label "Italia2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Italia2022
+:Italia2022 rdf:type owl:NamedIndividual ,
+                     :Gara ;
+            :gpv :Perez ;
+            :haPoleSitter :Leclerc ;
+            :haScuderiaVincitore :RedBull ;
+            :haVincitore :Verstappen ;
+            :tenutaPresso :Monza ;
+            rdfs:comment "Gara che si è svolta in occasione dell'edizione 2022 del Gran Premio d'Italia"@it ;
+            rdfs:label "Italia2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#JeddahCornicheCircuit
+:JeddahCornicheCircuit rdf:type owl:NamedIndividual ,
+                                :Circuito ;
+                       :lunghezza "6174"^^xsd:int ;
+                       :trackRecord "1:30:734" ;
+                       rdfs:comment "circuito cittadino di Jeddah, in Arabia Saudita"@it ;
+                       rdfs:label "JeddahCornicheCircuit"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Jerez
+:Jerez rdf:type owl:NamedIndividual ,
+                :Circuito ;
+       rdfs:comment "circuito di Jerez de la Frontera, in Spagna"@it ;
+       rdfs:label "Jerez"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#KoreaCircuit
+:KoreaCircuit rdf:type owl:NamedIndividual ,
+                       :Circuito ;
+              rdfs:comment "circuito internazionale della Corea del Sud"@it ;
+              rdfs:label "KoreaCircuit"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Kubica
+:Kubica rdf:type owl:NamedIndividual ,
+                 :Pilota ;
+        :numeroDiGara "88"^^xsd:int ;
+        :sigla "KUB" ;
+        rdfs:comment "Robert Kubica, pilota polacco di F1"@it ;
+        rdfs:label "Kubica"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Kyalami
+:Kyalami rdf:type owl:NamedIndividual ,
+                  :Circuito ;
+         rdfs:comment "circuito automobilistico di Midrand, in Sudafrica"@it ;
+         rdfs:label "Kyalami"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Latifi
+:Latifi rdf:type owl:NamedIndividual ,
+                 :Pilota ;
+        :numeroDiGara "6"^^xsd:int ;
+        :sigla "LAT" ;
+        rdfs:comment "Nicholas Latifi, pilota canadese di F1"@it ;
+        rdfs:label "Latifi"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Leclerc
+:Leclerc rdf:type owl:NamedIndividual ,
+                  :Pilota ;
+         :compagnoDiTeam :Sainz ;
+         :correPer :Ferrari ;
+         :detieneTrackRecord :BakuStreetCircuit ,
+                             :CircuitOfTheAmericas ;
+         :numeroDiGara "16"^^xsd:int ;
+         :sigla "LEC" ;
+         rdfs:comment "Charles Leclerc, pilota monegasco di F1"@it ;
+         rdfs:label "Leclerc"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#LongBeach
+:LongBeach rdf:type owl:NamedIndividual ,
+                    :Circuito ;
+           rdfs:comment "circuito di Long Beach, in California"@it ;
+           rdfs:label "LongBeach"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#LusailCircuit
+:LusailCircuit rdf:type owl:NamedIndividual ,
+                        :Circuito ;
+               :lunghezza "5418"^^xsd:int ;
+               :trackRecord "1:23:196" ;
+               rdfs:comment "circuito internazionale di Lusail, in Qatar"@it ;
+               rdfs:label "LusailCircuit"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Magnussen
+:Magnussen rdf:type owl:NamedIndividual ,
+                    :Pilota ;
+           :compagnoDiTeam :Hulkenberg ;
+           :correPer :Haas ;
+           :numeroDiGara "20"^^xsd:int ;
+           :sigla "MAG" ;
+           rdfs:comment "Kevin Magnussen, pilota danese di F1"@it ;
+           rdfs:label "Magnussen"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#MarinaBay
+:MarinaBay rdf:type owl:NamedIndividual ,
+                    :Circuito ;
+           :lunghezza "4928"^^xsd:int ;
+           rdfs:comment "circuito cittadino di Singapore"@it ;
+           rdfs:label "MarinaBay"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Mazepin
+:Mazepin rdf:type owl:NamedIndividual ,
+                  :Pilota ;
+         :numeroDiGara "9"^^xsd:int ;
+         :sigla "MAZ" ;
+         rdfs:comment "Nikita Mazepin, pilota russo di F1"@it ;
+         rdfs:label "Mazepin"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#McLaren
+:McLaren rdf:type owl:NamedIndividual ,
+                  :ScuderiaCliente ;
+         :partecipa :campionato2020 ,
+                    :campionato2021 ,
+                    :campionato2022 ;
+         rdfs:comment "squadra corse della casa automobilistica McLaren"@it ;
+         rdfs:label "McLaren"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Mercedes
+:Mercedes rdf:type owl:NamedIndividual ,
+                   :ScuderiaCostruttore ;
+          :fornisceMotore :AstonMartin ,
+                          :McLaren ,
+                          :RacingPoint ,
+                          :Williams ;
+          :partecipa :campionato2020 ,
+                     :campionato2021 ,
+                     :campionato2022 ;
+          rdfs:comment "squadra corse della casa automobilistica Mercedes-AMG"@it ;
+          rdfs:label "Mercedes"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Miami2022
+:Miami2022 rdf:type owl:NamedIndividual ,
+                    :Gara ;
+           :gpv :Verstappen ;
+           :haPoleSitter :Leclerc ;
+           :haScuderiaVincitore :RedBull ;
+           :haVincitore :Verstappen ;
+           :tenutaPresso :MiamiCircuit ;
+           rdfs:comment "Gara che si è svolta in occasione dell'edizione 2022 del Gran Premio di Miami"@it ;
+           rdfs:label "Miami2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#MiamiCircuit
+:MiamiCircuit rdf:type owl:NamedIndividual ,
+                       :Circuito ;
+              :lunghezza "5412"^^xsd:int ;
+              :trackRecord "1:29:708" ;
+              rdfs:comment "circuito cittadino di Miami"@it ;
+              rdfs:label "MiamiCircuit"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#MickSchumacher
+:MickSchumacher rdf:type owl:NamedIndividual ,
+                         :Pilota ;
+                :numeroDiGara "47"^^xsd:int ;
+                :sigla "MSC" ;
+                rdfs:comment "Mick Schumacher, pilota tedesco di F1"@it ;
+                rdfs:label "MickSchumacher"@it .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource :MickSchumacher ;
+   owl:annotatedProperty :sigla ;
+   owl:annotatedTarget "MSC" ;
+   rdfs:comment "Inizialmente previsto con sigla \"SCH\" perché non ci sarebbero state ambiguità, richiede e ottiene comunque di poter correre con la stessa di suo papà, Michael Schumacher, che doveva usare \"MSC\" per distinzione dal fratello Ralf, che per lo stesso motivo correva con sigla \"RSC\""@it
+ ] .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Misano
+:Misano rdf:type owl:NamedIndividual ,
+                 :Circuito ;
+        rdfs:comment "circuito di Misano Adriatico, in Italia"@it ;
+        rdfs:label "Misano"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Monaco2021
+:Monaco2021 rdf:type owl:NamedIndividual ,
+                     :Gara ;
+            :gpv :Hamilton ;
+            :haPoleSitter :Leclerc ;
+            :haScuderiaVincitore :RedBull ;
+            :haVincitore :Verstappen ;
+            :tenutaPresso :Montecarlo ;
+            rdfs:comment "Gara che si è svolta in occasione dell'edizione 2021 del Gran Premio di Monaco"@it ;
+            rdfs:label "Monaco2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Monaco2022
+:Monaco2022 rdf:type owl:NamedIndividual ,
+                     :Gara ;
+            :gpv :Norris ;
+            :haPoleSitter :Leclerc ;
+            :haScuderiaVincitore :RedBull ;
+            :haVincitore :Perez ;
+            :tenutaPresso :Montecarlo ;
+            rdfs:comment "Gara che si è svolta in occasione dell'edizione 2022 del Gran Premio di Monaco"@it ;
+            rdfs:label "Monaco2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Montecarlo
+:Montecarlo rdf:type owl:NamedIndividual ,
+                     :Circuito ;
+            :lunghezza "3337"^^xsd:int ;
+            :trackRecord "1:12:909" ;
+            rdfs:comment "circuito cittadino di Montecarlo, nel Principato di Monaco"@it ;
+            rdfs:label "Montecarlo"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Monza
+:Monza rdf:type owl:NamedIndividual ,
+                :Circuito ;
+       :lunghezza "5793"^^xsd:int ;
+       :trackRecord "1:21:046" ;
+       rdfs:comment "circuito automobilistico di Monza, in Italia"@it ;
+       rdfs:label "Monza"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Mugello
+:Mugello rdf:type owl:NamedIndividual ,
+                  :Circuito ;
+         :lunghezza "5245"^^xsd:int ;
+         :trackRecord "1:18:833" ;
+         rdfs:comment "circuito del Mugello, in Italia"@it ;
+         rdfs:label "Mugello"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#NeversMagnyCours
+:NeversMagnyCours rdf:type owl:NamedIndividual ,
+                           :Circuito ;
+                  rdfs:comment "circuito di Magny Cours, in Francia"@it ;
+                  rdfs:label "NeversMagnyCours"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Norris
+:Norris rdf:type owl:NamedIndividual ,
+                 :Pilota ;
+        :compagnoDiTeam :Piastri ;
+        :correPer :McLaren ;
+        :numeroDiGara "4"^^xsd:int ;
+        :sigla "NOR" ;
+        rdfs:comment "Lando Norris, pilota inglese di F1"@it ;
+        rdfs:label "Norris"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Nurburgring
+:Nurburgring rdf:type owl:NamedIndividual ,
+                      :Circuito ;
+             :lunghezza "5148"^^xsd:int ;
+             :trackRecord "1:28:139" ;
+             rdfs:comment "circuito automobilistico del Nurburgring, in Germania"@it ;
+             rdfs:label "Nurburgring"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Ocon
+:Ocon rdf:type owl:NamedIndividual ,
+               :Pilota ;
+      :compagnoDiTeam :Gasly ;
+      :correPer :Alpine ;
+      :numeroDiGara "31"^^xsd:int ;
+      :sigla "OCO" ;
+      rdfs:comment "Esteban Ocon, pilota francese di F1"@it ;
+      rdfs:label "Ocon"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Olanda2021
+:Olanda2021 rdf:type owl:NamedIndividual ,
+                     :Gara ;
+            :gpv :Hamilton ;
+            :haPoleSitter :Verstappen ;
+            :haScuderiaVincitore :RedBull ;
+            :haVincitore :Verstappen ;
+            :tenutaPresso :Zandvoort ;
+            rdfs:comment "Gara che si è svolta in occasione dell'edizione 2021 del Gran Premio di Olanda"@it ;
+            rdfs:label "Olanda2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Olanda2022
+:Olanda2022 rdf:type owl:NamedIndividual ,
+                     :Gara ;
+            :gpv :Verstappen ;
+            :haPoleSitter :Verstappen ;
+            :haScuderiaVincitore :RedBull ;
+            :haVincitore :Verstappen ;
+            :tenutaPresso :Zandvoort ;
+            rdfs:comment "Gara che si è svolta in occasione dell'edizione 2022 del Gran Premio di Olanda"@it ;
+            rdfs:label "Olanda2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#PaulRicard
+:PaulRicard rdf:type owl:NamedIndividual ,
+                     :Circuito ;
+            :lunghezza "5842"^^xsd:int ;
+            :trackRecord "1:32:740" ;
+            rdfs:comment "circuito Paul Ricard situato a Le Castellet, in Francia"@it ;
+            rdfs:label "PaulRicard"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Perez
+:Perez rdf:type owl:NamedIndividual ,
+                :Pilota ;
+       :compagnoDiTeam :Verstappen ;
+       :correPer :RedBull ;
+       :detieneTrackRecord :AlbertPark ;
+       :numeroDiGara "11"^^xsd:int ;
+       :sigla "PER" ;
+       rdfs:comment "Sergio Perez, pilota messicano di F1"@it ;
+       rdfs:label "Perez"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Piastri
+:Piastri rdf:type owl:NamedIndividual ,
+                  :Pilota ;
+         :compagnoDiTeam :Norris ;
+         :correPer :McLaren ;
+         :numeroDiGara "81"^^xsd:int ;
+         :sigla "PIA" ;
+         rdfs:comment "Oscar Piastri, pilota australiano di F1"@it ;
+         rdfs:label "Piastri"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Portogallo2020
+:Portogallo2020 rdf:type owl:NamedIndividual ,
+                         :Gara ;
+                :gpv :Hamilton ;
+                :haPoleSitter :Hamilton ;
+                :haScuderiaVincitore :Mercedes ;
+                :haVincitore :Hamilton ;
+                :tenutaPresso :Algarve ;
+                rdfs:comment "Gara che si è svolta in occasione dell'edizione 2020 del Gran Premio del Portogallo"@it ;
+                rdfs:label "Portogallo2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Portogallo2021
+:Portogallo2021 rdf:type owl:NamedIndividual ,
+                         :Gara ;
+                :gpv :Bottas ;
+                :haPoleSitter :Bottas ;
+                :haScuderiaVincitore :Mercedes ;
+                :haVincitore :Hamilton ;
+                :tenutaPresso :Algarve ;
+                rdfs:comment "Gara che si è svolta in occasione dell'edizione 2021 del Gran Premio del Portogallo"@it ;
+                rdfs:label "Portogallo2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Qatar2021
+:Qatar2021 rdf:type owl:NamedIndividual ,
+                    :Gara ;
+           :gpv :Verstappen ;
+           :haPoleSitter :Hamilton ;
+           :haScuderiaVincitore :Mercedes ;
+           :haVincitore :Hamilton ;
+           :tenutaPresso :LusailCircuit ;
+           rdfs:comment "Gara che si è svolta in occasione dell'edizione 2021 del Gran Premio del Qatar"@it ;
+           rdfs:label "Qatar2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#RacingPoint
+:RacingPoint rdf:type owl:NamedIndividual ,
+                      :ScuderiaCliente ;
+             :partecipa :campionato2020 ;
+             rdfs:comment "squadra corse di F1 in attività fino al 2020 e in seguito diventata Aston Martin"@it ;
+             rdfs:label "RacingPoint"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Raikkonen
+:Raikkonen rdf:type owl:NamedIndividual ,
+                    :Pilota ;
+           :detieneTrackRecord :Hockenheimring ;
+           :numeroDiGara "7"^^xsd:int ;
+           :sigla "RAI" ;
+           rdfs:comment "Kimi Raikkonen, pilota finlandese di F1"@it ;
+           rdfs:label "Raikkonen"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#RedBull
+:RedBull rdf:type owl:NamedIndividual ,
+                  :ScuderiaCostruttore ;
+         :fornisceMotore :AlphaTauri ;
+         :partecipa :campionato2020 ,
+                    :campionato2021 ,
+                    :campionato2022 ;
+         rdfs:comment "squadra corse austriaca della Red Bull"@it ;
+         rdfs:label "RedBull"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#RedBullRing
+:RedBullRing rdf:type owl:NamedIndividual ,
+                      :Circuito ;
+             :lunghezza "4318"^^xsd:int ;
+             :trackRecord "1:04:391" ;
+             rdfs:comment "circuito automobilistico di Spielberg, in Austria"@it ;
+             rdfs:label "RedBullRing"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#RicardoTormo
+:RicardoTormo rdf:type owl:NamedIndividual ,
+                       :Circuito ;
+              rdfs:comment "circuito motoristico dedicato a Ricardo Tormo, in Spagna"@it ;
+              rdfs:label "RicardoTormo"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Ricciardo
+:Ricciardo rdf:type owl:NamedIndividual ,
+                    :Pilota ;
+           :compagnoDiTeam :Tsunoda ;
+           :correPer :AlphaTauri ;
+           :numeroDiGara "3"^^xsd:int ;
+           :sigla "RIC" ;
+           rdfs:comment "Daniel Ricciardo, pilota australiano di F1"@it ;
+           rdfs:label "Ricciardo"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Russell
+:Russell rdf:type owl:NamedIndividual ,
+                  :Pilota ;
+         :compagnoDiTeam :Hamilton ;
+         :correPer :Mercedes ;
+         :numeroDiGara "63"^^xsd:int ;
+         :sigla "RUS" ;
+         rdfs:comment "George Russell, pilota inglese di F1"@it ;
+         rdfs:label "Russell"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Russia2020
+:Russia2020 rdf:type owl:NamedIndividual ,
+                     :Gara ;
+            :gpv :Bottas ;
+            :haPoleSitter :Hamilton ;
+            :haScuderiaVincitore :Mercedes ;
+            :haVincitore :Bottas ;
+            :tenutaPresso :Sochi ;
+            rdfs:comment "Gara che si è svolta in occasione dell'edizione 2020 del Gran Premio di Russia"@it ;
+            rdfs:label "Russia2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Russia2021
+:Russia2021 rdf:type owl:NamedIndividual ,
+                     :Gara ;
+            :gpv :Norris ;
+            :haPoleSitter :Norris ;
+            :haScuderiaVincitore :Mercedes ;
+            :haVincitore :Hamilton ;
+            :tenutaPresso :Sochi ;
+            rdfs:comment "Gara che si è svolta in occasione dell'edizione 2021 del Gran Premio di Russia"@it ;
+            rdfs:label "Russia2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Sachsenring
+:Sachsenring rdf:type owl:NamedIndividual ,
+                      :Circuito ;
+             rdfs:comment "circuito motoristico in Germania"@it ;
+             rdfs:label "Sachsenring"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Sainz
+:Sainz rdf:type owl:NamedIndividual ,
+                :Pilota ;
+       :compagnoDiTeam :Leclerc ;
+       :correPer :Ferrari ;
+       :numeroDiGara "55"^^xsd:int ;
+       :sigla "SAI" ;
+       rdfs:comment "Carlos Sainz Jr., pilota spagnolo di F1"@it ;
+       rdfs:label "Sainz"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Sakhir2020
+:Sakhir2020 rdf:type owl:NamedIndividual ,
+                     :Gara ;
+            :gpv :Russell ;
+            :haPoleSitter :Bottas ;
+            :haScuderiaVincitore :RacingPoint ;
+            :haVincitore :Perez ;
+            :tenutaPresso :BahrainCircuit ;
+            rdfs:comment "Gara che si è svolta in occasione dell'edizione 2020 del Gran Premio di Sakhir"@it ;
+            rdfs:label "Sakhir2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#SanPaolo2021
+:SanPaolo2021 rdf:type owl:NamedIndividual ,
+                       :Gara ;
+              :gpv :Perez ;
+              :haPoleSitter :Bottas ;
+              :haScuderiaVincitore :Mercedes ;
+              :haVincitore :Hamilton ;
+              :tenutaPresso :Interlagos ;
+              rdfs:comment "Gara che si è svolta in occasione dell'edizione 2021 del Gran Premio di San Paolo"@it ;
+              rdfs:label "SanPaolo2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#SanPaolo2022
+:SanPaolo2022 rdf:type owl:NamedIndividual ,
+                       :Gara ;
+              :gpv :Russell ;
+              :haPoleSitter :Russell ;
+              :haScuderiaVincitore :Mercedes ;
+              :haVincitore :Russell ;
+              :tenutaPresso :Interlagos ;
+              rdfs:comment "Gara che si è svolta in occasione dell'edizione 2022 del Gran Premio di San Paolo"@it ;
+              rdfs:label "SanPaolo2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Sargeant
+:Sargeant rdf:type owl:NamedIndividual ,
+                   :Pilota ;
+          :compagnoDiTeam :Albon ;
+          :correPer :Williams ;
+          :numeroDiGara "2"^^xsd:int ;
+          :sigla "SAR" ;
+          rdfs:comment "Logan Sargeant, pilota statunitense di F1"@it ;
+          rdfs:label "Sargeant"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Sebring
+:Sebring rdf:type owl:NamedIndividual ,
+                  :Circuito ;
+         rdfs:comment "circuito automobilistico di Sebring, negli Stati Uniti"@it ;
+         rdfs:label "Sebring"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Sepang
+:Sepang rdf:type owl:NamedIndividual ,
+                 :Circuito ;
+        :lunghezza "5543"^^xsd:int ;
+        :trackRecord "1:34:080" ;
+        rdfs:comment "circuito internazionale di Sepang, in Malesia"@it ;
+        rdfs:label "Sepang"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Shanghai
+:Shanghai rdf:type owl:NamedIndividual ,
+                   :Circuito ;
+          :lunghezza "5451"^^xsd:int ;
+          :trackRecord "1:32:238" ;
+          rdfs:comment "circuito di Shanghai, in Cina"@it ;
+          rdfs:label "Shanghai"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Silverstone
+:Silverstone rdf:type owl:NamedIndividual ,
+                      :Circuito ;
+             :lunghezza "5891"^^xsd:int ;
+             :trackRecord "1:27:097" ;
+             rdfs:comment "circuito di Silverstone, in Inghilterra"@it ;
+             rdfs:label "Silverstone"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Singapore2022
+:Singapore2022 rdf:type owl:NamedIndividual ,
+                        :Gara ;
+               :gpv :Russell ;
+               :haPoleSitter :Leclerc ;
+               :haScuderiaVincitore :RedBull ;
+               :haVincitore :Perez ;
+               :tenutaPresso :MarinaBay ;
+               rdfs:comment "Gara che si è svolta in occasione dell'edizione 2022 del Gran Premio di Singapore"@it ;
+               rdfs:label "Singapore2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Sochi
+:Sochi rdf:type owl:NamedIndividual ,
+                :Circuito ;
+       :lunghezza "5848"^^xsd:int ;
+       :trackRecord "1:35:761" ;
+       rdfs:comment "circuito di Sochi, in Russia"@it ;
+       rdfs:label "Sochi"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#SpaFrancorchamps
+:SpaFrancorchamps rdf:type owl:NamedIndividual ,
+                           :Circuito ;
+                  :lunghezza "7004"^^xsd:int ;
+                  :trackRecord "1:46:286" ;
+                  rdfs:comment "circuito di Spa-Francorchamps, in Belgio"@it ;
+                  rdfs:label "SpaFrancorchamps"@it .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource :SpaFrancorchamps ;
+   owl:annotatedProperty :lunghezza ;
+   owl:annotatedTarget "7004"^^xsd:int ;
+   rdfs:comment "nonostante la FIA imponga 7000 metri come lunghezza massima per omologare un circuito, Spa riceve un trattamento di eccezione"@it
+ ] .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Spagna2020
+:Spagna2020 rdf:type owl:NamedIndividual ,
+                     :Gara ;
+            :gpv :Bottas ;
+            :haPoleSitter :Hamilton ;
+            :haScuderiaVincitore :Mercedes ;
+            :haVincitore :Hamilton ;
+            :tenutaPresso :BarcelonaCatalunya ;
+            rdfs:comment "Gara che si è svolta in occasione dell'edizione 2020 del Gran Premio di Spagna"@it ;
+            rdfs:label "Spagna2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Spagna2021
+:Spagna2021 rdf:type owl:NamedIndividual ,
+                     :Gara ;
+            :gpv :Verstappen ;
+            :haPoleSitter :Hamilton ;
+            :haScuderiaVincitore :Mercedes ;
+            :haVincitore :Hamilton ;
+            :tenutaPresso :BarcelonaCatalunya ;
+            rdfs:comment "Gara che si è svolta in occasione dell'edizione 2021 del Gran Premio di Spagna"@it ;
+            rdfs:label "Spagna2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Spagna2022
+:Spagna2022 rdf:type owl:NamedIndividual ,
+                     :Gara ;
+            :gpv :Perez ;
+            :haPoleSitter :Leclerc ;
+            :haScuderiaVincitore :RedBull ;
+            :haVincitore :Verstappen ;
+            :tenutaPresso :BarcelonaCatalunya ;
+            rdfs:comment "Gara che si è svolta in occasione dell'edizione 2022 del Gran Premio di Spagna"@it ;
+            rdfs:label "Spagna2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#StatiUniti2021
+:StatiUniti2021 rdf:type owl:NamedIndividual ,
+                         :Gara ;
+                :gpv :Hamilton ;
+                :haPoleSitter :Verstappen ;
+                :haScuderiaVincitore :RedBull ;
+                :haVincitore :Verstappen ;
+                :tenutaPresso :CircuitOfTheAmericas ;
+                rdfs:comment "Gara che si è svolta in occasione dell'edizione 2021 del Gran Premio degli Stati Uniti"@it ;
+                rdfs:label "StatiUniti2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#StatiUniti2022
+:StatiUniti2022 rdf:type owl:NamedIndividual ,
+                         :Gara ;
+                :gpv :Russell ;
+                :haPoleSitter :Sainz ;
+                :haScuderiaVincitore :RedBull ;
+                :haVincitore :Verstappen ;
+                :tenutaPresso :CircuitOfTheAmericas ;
+                rdfs:comment "Gara che si è svolta in occasione dell'edizione 2022 del Gran Premio degli Stati Uniti"@it ;
+                rdfs:label "StatiUniti2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Stiria2020
+:Stiria2020 rdf:type owl:NamedIndividual ,
+                     :Gara ;
+            :gpv :Sainz ;
+            :haPoleSitter :Hamilton ;
+            :haScuderiaVincitore :Mercedes ;
+            :haVincitore :Hamilton ;
+            :tenutaPresso :RedBullRing ;
+            rdfs:comment "Gara che si è svolta in occasione dell'edizione 2020 del Gran Premio di Stiria"@it ;
+            rdfs:label "Stiria2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Stiria2021
+:Stiria2021 rdf:type owl:NamedIndividual ,
+                     :Gara ;
+            :gpv :Hamilton ;
+            :haPoleSitter :Verstappen ;
+            :haScuderiaVincitore :RedBull ;
+            :haVincitore :Verstappen ;
+            :tenutaPresso :RedBullRing ;
+            rdfs:comment "Gara che si è svolta in occasione dell'edizione 2021 del Gran Premio di Stiria"@it ;
+            rdfs:label "Stiria2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Stroll
+:Stroll rdf:type owl:NamedIndividual ,
+                 :Pilota ;
+        :compagnoDiTeam :Alonso ;
+        :correPer :AstonMartin ;
+        :numeroDiGara "18"^^xsd:int ;
+        :sigla "STR" ;
+        rdfs:comment "Lance Stroll, pilota canadese di F1"@it ;
+        rdfs:label "Stroll"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Suzuka
+:Suzuka rdf:type owl:NamedIndividual ,
+                 :Circuito ;
+        :lunghezza "5807"^^xsd:int ;
+        :trackRecord "1:30:983" ;
+        rdfs:comment "circuito di Suzuka, in Giappone"@it ;
+        rdfs:label "Suzuka"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#TTCircuitAssen
+:TTCircuitAssen rdf:type owl:NamedIndividual ,
+                         :Circuito ;
+                rdfs:comment "circuito di Assen, in Olanda"@it ;
+                rdfs:label "TTCircuitAssen"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Toscana2020
+:Toscana2020 rdf:type owl:NamedIndividual ,
+                      :Gara ;
+             :gpv :Hamilton ;
+             :haPoleSitter :Hamilton ;
+             :haScuderiaVincitore :Mercedes ;
+             :haVincitore :Hamilton ;
+             :tenutaPresso :Mugello ;
+             rdfs:comment "Gara che si è svolta in occasione dell'edizione 2020 del Gran Premio di Toscana"@it ;
+             rdfs:label "Toscana2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Tsunoda
+:Tsunoda rdf:type owl:NamedIndividual ,
+                  :Pilota ;
+         :compagnoDiTeam :Ricciardo ;
+         :correPer :AlphaTauri ;
+         :numeroDiGara "22"^^xsd:int ;
+         :sigla "TSU" ;
+         rdfs:comment "Yuki Tsunoda, pilota giapponese di F1"@it ;
+         rdfs:label "Tsunoda"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Turchia2020
+:Turchia2020 rdf:type owl:NamedIndividual ,
+                      :Gara ;
+             :gpv :Norris ;
+             :haPoleSitter :Stroll ;
+             :haScuderiaVincitore :Mercedes ;
+             :haVincitore :Hamilton ;
+             :tenutaPresso :IstanbulPark ;
+             rdfs:comment "Gara che si è svolta in occasione dell'edizione 2020 del Gran Premio di Turchia"@it ;
+             rdfs:label "Turchia2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Turchia2021
+:Turchia2021 rdf:type owl:NamedIndividual ,
+                      :Gara ;
+             :gpv :Bottas ;
+             :haPoleSitter :Bottas ;
+             :haScuderiaVincitore :Mercedes ;
+             :haVincitore :Bottas ;
+             :tenutaPresso :IstanbulPark ;
+             rdfs:comment "Gara che si è svolta in occasione dell'edizione 2021 del Gran Premio di Turchia"@it ;
+             rdfs:label "Turchia2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#TwinRingMotegi
+:TwinRingMotegi rdf:type owl:NamedIndividual ,
+                         :Circuito ;
+                rdfs:comment "circuito motoristico di Motegi, in Giappone"@it ;
+                rdfs:label "TwinRingMotegi"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Ungheria2020
+:Ungheria2020 rdf:type owl:NamedIndividual ,
+                       :Gara ;
+              :gpv :Hamilton ;
+              :haPoleSitter :Hamilton ;
+              :haScuderiaVincitore :Mercedes ;
+              :haVincitore :Hamilton ;
+              :tenutaPresso :Hungaroring ;
+              rdfs:comment "Gara che si è svolta in occasione dell'edizione 2020 del Gran Premio di Ungheria"@it ;
+              rdfs:label "Ungheria2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Ungheria2021
+:Ungheria2021 rdf:type owl:NamedIndividual ,
+                       :Gara ;
+              :gpv :Gasly ;
+              :haPoleSitter :Hamilton ;
+              :haScuderiaVincitore :Alpine ;
+              :haVincitore :Ocon ;
+              :tenutaPresso :Hungaroring ;
+              rdfs:comment "Gara che si è svolta in occasione dell'edizione 2021 del Gran Premio di Ungheria"@it ;
+              rdfs:label "Ungheria2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Ungheria2022
+:Ungheria2022 rdf:type owl:NamedIndividual ,
+                       :Gara ;
+              :gpv :Hamilton ;
+              :haPoleSitter :Russell ;
+              :haScuderiaVincitore :RedBull ;
+              :haVincitore :Verstappen ;
+              :tenutaPresso :Hungaroring ;
+              rdfs:comment "Gara che si è svolta in occasione dell'edizione 2022 del Gran Premio di Ungheria"@it ;
+              rdfs:label "Ungheria2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Verstappen
+:Verstappen rdf:type owl:NamedIndividual ,
+                     :Pilota ;
+            :compagnoDiTeam :Perez ;
+            :correPer :RedBull ;
+            :detieneTrackRecord :BarcelonaCatalunya ,
+                                :LusailCircuit ,
+                                :MiamiCircuit ,
+                                :Nurburgring ,
+                                :RedBullRing ,
+                                :YasMarina ;
+            :numeroDiGara "1"^^xsd:int ;
+            :sigla "VER" ;
+            rdfs:comment "Max Verstappen, pilota olandese di F1"@it ;
+            rdfs:label "Verstappen"@it .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource :Verstappen ;
+   owl:annotatedProperty :numeroDiGara ;
+   owl:annotatedTarget "1"^^xsd:int ;
+   rdfs:comment "Il suo numero di gara è il 33 ma dal 2022 sceglie di utilizzare il numero 1, numero riservato al campione in carica"@it
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource :Verstappen ;
+   owl:annotatedProperty :sigla ;
+   owl:annotatedTarget "VER" ;
+   rdfs:comment "Corre con sigla \"VER\" solo dal 2017 perché prima era già usata dal collega Vergne; correva come \"VES\" fino al 2016"@it
+ ] .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Vettel
+:Vettel rdf:type owl:NamedIndividual ,
+                 :Pilota ;
+        :detieneTrackRecord :PaulRicard ,
+                            :Sepang ;
+        :numeroDiGara "5"^^xsd:int ;
+        :sigla "VET" ;
+        rdfs:comment "Sebastian Vettel, pilota tedesco di F1"@it ;
+        rdfs:label "Vettel"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#WatkinsGlen
+:WatkinsGlen rdf:type owl:NamedIndividual ,
+                      :Circuito ;
+             rdfs:comment "circuito di Watkins Glen, negli Stati uniti"@it ;
+             rdfs:label "WatkinsGlen"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Williams
+:Williams rdf:type owl:NamedIndividual ,
+                   :ScuderiaCliente ;
+          :partecipa :campionato2020 ,
+                     :campionato2021 ,
+                     :campionato2022 ;
+          rdfs:comment "squadra corse di Formula 1 della Williams"@it ;
+          rdfs:label "Williams"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#YasMarina
+:YasMarina rdf:type owl:NamedIndividual ,
+                    :Circuito ;
+           :lunghezza "5281"^^xsd:int ;
+           :trackRecord "1:26:103" ;
+           rdfs:comment "circuito automobilistico di Abu Dhabi, negli Emirati Arabi Uniti"@it ;
+           rdfs:label "YasMarina"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Zandvoort
+:Zandvoort rdf:type owl:NamedIndividual ,
+                    :Circuito ;
+           :lunghezza "4259"^^xsd:int ;
+           :trackRecord "1:11:097" ;
+           rdfs:comment "circuito di Zandvoort, in Olanda"@it ;
+           rdfs:label "Zandvoort"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Zhou
+:Zhou rdf:type owl:NamedIndividual ,
+               :Pilota ;
+      :compagnoDiTeam :Bottas ;
+      :correPer :AlfaRomeoSauber ;
+      :numeroDiGara "24"^^xsd:int ;
+      :sigla "ZHO" ;
+      rdfs:comment "Zhou Guanyu, pilota cinese di F1"@it ;
+      rdfs:label "Zhou"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#Zolder
+:Zolder rdf:type owl:NamedIndividual ,
+                 :Circuito ;
+        rdfs:comment "circuito di Zolder, in Belgio"@it ;
+        rdfs:label "Zolder"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#campionato2020
+:campionato2020 rdf:type owl:NamedIndividual ,
+                         :Campionato ;
+                :haCampione :Hamilton ;
+                :haCampioneCostruttori :Mercedes ;
+                :haPrimoEvento :GpAustria2020 ;
+                :haUltimoEvento :GpAbuDhabi2020 ;
+                :anno "2020"^^xsd:int ;
+                rdfs:comment "edizione 2020 del campionato mondiale di Formula 1"@it ;
+                rdfs:label "campionato2020"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#campionato2021
+:campionato2021 rdf:type owl:NamedIndividual ,
+                         :Campionato ;
+                :haCampione :Verstappen ;
+                :haCampioneCostruttori :Mercedes ;
+                :haPrimoEvento :GpBahrain2021 ;
+                :haUltimoEvento :GpAbuDhabi2021 ;
+                :anno "2021"^^xsd:int ;
+                rdfs:comment "edizione 2021 del campionato mondiale di Formula 1"@it ;
+                rdfs:label "campionato2021"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#campionato2022
+:campionato2022 rdf:type owl:NamedIndividual ,
+                         :Campionato ;
+                :haCampione :Verstappen ;
+                :haCampioneCostruttori :RedBull ;
+                :haPrimoEvento :GpBahrain2022 ;
+                :haUltimoEvento :GpAbuDhabi2022 ;
+                :anno "2022"^^xsd:int ;
+                rdfs:comment "edizione 2022 del campionato mondiale di Formula 1"@it ;
+                rdfs:label "campionato2022"@it .
+
+
+###  http://www.valbormida.it/attilio/f1.owl#70anniversario2020
+<http://www.valbormida.it/attilio/f1.owl#70anniversario2020> rdf:type owl:NamedIndividual ,
+                                                                      :Gara ;
+                                                             :gpv :Hamilton ;
+                                                             :haPoleSitter :Bottas ;
+                                                             :haScuderiaVincitore :RedBull ;
+                                                             :haVincitore :Verstappen ;
+                                                             :tenutaPresso :Silverstone ;
+                                                             rdfs:comment "Gara che si è svolta in occasione dell'edizione 2020 del Gran Premio del 70° Anniversario"@it ;
+                                                             rdfs:label "70anniversario2020"@it .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Campionato
+                :Circuito
+                :Evento
+                :Gara
+                :GranPremio
+                :Pilota
+                :Scuderia
+              )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :AbuDhabi2020
+                        :AbuDhabi2021
+                        :AbuDhabi2022
+                        :AlbertPark
+                        :Albon
+                        :AlfaRomeoSauber
+                        :Algarve
+                        :Alonso
+                        :AlphaTauri
+                        :Alpine
+                        :Anderstorp
+                        :Arabia2021
+                        :Arabia2022
+                        :Aragon
+                        :AstonMartin
+                        :Australia2022
+                        :Austria2020
+                        :Austria2021
+                        :Austria2022
+                        :AutodromoEnzoDinoFerrari
+                        :AutodromoHermanosRodriguez
+                        :Azerbaijan2021
+                        :Azerbaijan2022
+                        :Bahrain2020
+                        :Bahrain2021
+                        :Bahrain2022
+                        :BahrainCircuit
+                        :BakuStreetCircuit
+                        :BarcelonaCatalunya
+                        :Belgio2020
+                        :Belgio2021
+                        :Belgio2022
+                        :Bottas
+                        :BrandsHatch
+                        :Brno
+                        :BuddhCircuit
+                        :Canada2022
+                        :CircuitDeLaSarthe
+                        :CircuitGillesVilleneuve
+                        :CircuitOfTheAmericas
+                        :CittàDelMessico2021
+                        :CittàDelMessico2022
+                        :DeVries
+                        :Digione
+                        :DoningtonPark
+                        :Eifel2020
+                        :EmiliaRomagna2020
+                        :EmiliaRomagna2021
+                        :EmiliaRomagna2022
+                        :EstorilCircuit
+                        :Ferrari
+                        :Fiorano
+                        :Francia2021
+                        :Francia2022
+                        :FujiSpeedway
+                        :Gasly
+                        :Giappone2022
+                        :Gp70Anniversario
+                        :Gp70Anniversario2020
+                        :GpAbuDhabi
+                        :GpAbuDhabi2020
+                        :GpAbuDhabi2021
+                        :GpAbuDhabi2022
+                        :GpArabia
+                        :GpArabia2021
+                        :GpArabia2022
+                        :GpAustralia
+                        :GpAustralia2022
+                        :GpAustria
+                        :GpAustria2020
+                        :GpAustria2021
+                        :GpAustria2022
+                        :GpAzerbaijan
+                        :GpAzerbaijan2021
+                        :GpAzerbaijan2022
+                        :GpBahrain
+                        :GpBahrain2020
+                        :GpBahrain2021
+                        :GpBahrain2022
+                        :GpBelgio
+                        :GpBelgio2020
+                        :GpBelgio2021
+                        :GpBelgio2022
+                        :GpBrasile
+                        :GpCanada
+                        :GpCanada2022
+                        :GpCina
+                        :GpCittàDelMessico
+                        :GpCittàDelMessico2021
+                        :GpCittàDelMessico2022
+                        :GpCorea
+                        :GpEifel
+                        :GpEifel2020
+                        :GpEmiliaRomagna
+                        :GpEmiliaRomagna2020
+                        :GpEmiliaRomagna2021
+                        :GpEmiliaRomagna2022
+                        :GpEuropa
+                        :GpFrancia
+                        :GpFrancia2021
+                        :GpFrancia2022
+                        :GpGermania
+                        :GpGiappone
+                        :GpGiappone2022
+                        :GpGranBretagna
+                        :GpGranBretagna2020
+                        :GpGranBretagna2021
+                        :GpGranBretagna2022
+                        :GpIndia
+                        :GpItalia
+                        :GpItalia2020
+                        :GpItalia2021
+                        :GpItalia2022
+                        :GpMalesia
+                        :GpMessico
+                        :GpMiami
+                        :GpMiami2022
+                        :GpMonaco
+                        :GpMonaco2021
+                        :GpMonaco2022
+                        :GpOlanda
+                        :GpOlanda2021
+                        :GpOlanda2022
+                        :GpPortogallo
+                        :GpPortogallo2020
+                        :GpPortogallo2021
+                        :GpQatar
+                        :GpQatar2021
+                        :GpRussia
+                        :GpRussia2020
+                        :GpRussia2021
+                        :GpSakhir
+                        :GpSakhir2020
+                        :GpSanMarino
+                        :GpSanPaolo
+                        :GpSanPaolo2021
+                        :GpSanPaolo2022
+                        :GpSingapore
+                        :GpSingapore2022
+                        :GpSpagna
+                        :GpSpagna2020
+                        :GpSpagna2021
+                        :GpSpagna2022
+                        :GpStatiUniti
+                        :GpStatiUniti2021
+                        :GpStatiUniti2022
+                        :GpStiria
+                        :GpStiria2020
+                        :GpStiria2021
+                        :GpToscana
+                        :GpToscana2020
+                        :GpTurchia
+                        :GpTurchia2020
+                        :GpTurchia2021
+                        :GpUngheria
+                        :GpUngheria2020
+                        :GpUngheria2021
+                        :GpUngheria2022
+                        :GranBretagna2020
+                        :GranBretagna2021
+                        :GranBretagna2022
+                        :Haas
+                        :Hamilton
+                        :Hockenheimring
+                        :Hulkenberg
+                        :Hungaroring
+                        :IgoraDrive
+                        :Indianapolis
+                        :Interlagos
+                        :IstanbulPark
+                        :Italia2020
+                        :Italia2021
+                        :Italia2022
+                        :JeddahCornicheCircuit
+                        :Jerez
+                        :KoreaCircuit
+                        :Kubica
+                        :Kyalami
+                        :Latifi
+                        :Leclerc
+                        :LongBeach
+                        :LusailCircuit
+                        :Magnussen
+                        :MarinaBay
+                        :Mazepin
+                        :McLaren
+                        :Mercedes
+                        :Miami2022
+                        :MiamiCircuit
+                        :MickSchumacher
+                        :Misano
+                        :Monaco2021
+                        :Monaco2022
+                        :Montecarlo
+                        :Monza
+                        :Mugello
+                        :NeversMagnyCours
+                        :Norris
+                        :Nurburgring
+                        :Ocon
+                        :Olanda2021
+                        :Olanda2022
+                        :PaulRicard
+                        :Perez
+                        :Piastri
+                        :Portogallo2020
+                        :Portogallo2021
+                        :Qatar2021
+                        :RacingPoint
+                        :Raikkonen
+                        :RedBull
+                        :RedBullRing
+                        :RicardoTormo
+                        :Ricciardo
+                        :Russell
+                        :Russia2020
+                        :Russia2021
+                        :Sachsenring
+                        :Sainz
+                        :Sakhir2020
+                        :SanPaolo2021
+                        :SanPaolo2022
+                        :Sargeant
+                        :Sebring
+                        :Sepang
+                        :Shanghai
+                        :Silverstone
+                        :Singapore2022
+                        :Sochi
+                        :SpaFrancorchamps
+                        :Spagna2020
+                        :Spagna2021
+                        :Spagna2022
+                        :StatiUniti2021
+                        :StatiUniti2022
+                        :Stiria2020
+                        :Stiria2021
+                        :Stroll
+                        :Suzuka
+                        :TTCircuitAssen
+                        :Toscana2020
+                        :Tsunoda
+                        :Turchia2020
+                        :Turchia2021
+                        :TwinRingMotegi
+                        :Ungheria2020
+                        :Ungheria2021
+                        :Ungheria2022
+                        :Verstappen
+                        :Vettel
+                        :WatkinsGlen
+                        :Williams
+                        :YasMarina
+                        :Zandvoort
+                        :Zhou
+                        :Zolder
+                        :campionato2020
+                        :campionato2021
+                        :campionato2022
+                        <http://www.valbormida.it/attilio/f1.owl#70anniversario2020>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :Gp70Anniversario
+                        :GpAbuDhabi
+                        :GpArabia
+                        :GpAustralia
+                        :GpAustria
+                        :GpAzerbaijan
+                        :GpBahrain
+                        :GpBelgio
+                        :GpBrasile
+                        :GpCanada
+                        :GpCina
+                        :GpCittàDelMessico
+                        :GpCorea
+                        :GpEifel
+                        :GpEmiliaRomagna
+                        :GpEuropa
+                        :GpFrancia
+                        :GpGermania
+                        :GpGiappone
+                        :GpGranBretagna
+                        :GpIndia
+                        :GpItalia
+                        :GpMalesia
+                        :GpMessico
+                        :GpMiami
+                        :GpMonaco
+                        :GpOlanda
+                        :GpPortogallo
+                        :GpQatar
+                        :GpRussia
+                        :GpSakhir
+                        :GpSanMarino
+                        :GpSanPaolo
+                        :GpSingapore
+                        :GpSpagna
+                        :GpStatiUniti
+                        :GpStiria
+                        :GpToscana
+                        :GpTurchia
+                        :GpUngheria
+                      )
+] .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
